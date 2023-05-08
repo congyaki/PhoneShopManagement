@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace PhoneShopManagement.Areas.Admin.Models
+namespace Model.EF
 {
     public partial class PhoneShopDbContext : DbContext
     {
@@ -27,7 +27,7 @@ namespace PhoneShopManagement.Areas.Admin.Models
         public virtual DbSet<TbOrderDetail> TbOrderDetails { get; set; } = null!;
         public virtual DbSet<TbProduct> TbProducts { get; set; } = null!;
 
-/*        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PhoneShopManagement.Areas.Admin.Models
+namespace Model.EF
 {
     public partial class TbEmployee
     {
