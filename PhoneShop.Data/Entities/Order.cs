@@ -13,4 +13,5 @@ public partial class Order
     public OrderStatus OStatus { get; set; }
 
     public List<OrderDetail> OrderDetails { get; set; }
+    public AppUser AppUser { get; set; }
 }

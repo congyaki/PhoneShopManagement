@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.Entities;
 using PhoneShop.Data.Enums;
 using System;
@@ -43,6 +44,40 @@ namespace PhoneShop.Data.Extensions
                 new ProductInCategory { PId = 4, CId = 2 },
                 new ProductInCategory { PId = 5, CId = 3 }
                 );
+
+
+            // any guid
+            var roleId = new Guid("5768A50E-31B6-4933-B3B3-B0336F5656E6");
+            var adminId = new Guid("7642BE16-2C21-40F0-81BB-CE85B30B0783");
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = roleId,
+                Name = "admin",
+                NormalizedName = "admin",
+                Description = "Administrator role"
+            });
+
+            var hasher = new PasswordHasher<AppUser>();
+            modelBuilder.Entity<AppUser>().HasData(new AppUser
+            {
+                Id = adminId,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "duccong29092003@gmail.com",
+                NormalizedEmail = "duccong29092003@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
+                SecurityStamp = string.Empty,
+                FirstName = "Cong",
+                LastName = "Do",
+                Dob = new DateTime(2003, 09, 29)
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = roleId,
+                UserId = adminId
+            });
         }
     }
 }

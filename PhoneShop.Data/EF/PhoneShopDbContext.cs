@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.Entities;
 using PhoneShop.Data.Enums;
@@ -7,7 +9,7 @@ using PhoneShop.Data.Extensions;
 
 namespace PhoneShop.Data.EF;
 
-public partial class PhoneShopDbContext : DbContext
+public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Guid>
 {
     public PhoneShopDbContext()
     {
@@ -87,6 +89,8 @@ public partial class PhoneShopDbContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("O_Date");
             entity.Property(e => e.OStatus).HasColumnName("O_Status");
+
+            entity.HasOne(e => e.AppUser).WithMany(e => e.Orders).HasForeignKey(e => e.UserId);
 
         });
 
@@ -169,10 +173,34 @@ public partial class PhoneShopDbContext : DbContext
 
         });
 
+        modelBuilder.Entity<AppUser>(entity =>
+        {
+            entity.ToTable("tbAppUser");
+            entity.Property(e => e.FirstName).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.LastName).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Dob).IsRequired();
+
+        });
+
+        modelBuilder.Entity<AppRole>(entity =>
+        {
+            entity.ToTable("tbAppRole");
+            entity.Property(e => e.Description).HasMaxLength(200).IsRequired();
+        });
+
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("tbAppUserClaim");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("tbAppUserRole").HasKey(e => new {e.RoleId, e.UserId});
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("tbAppUserLogin").HasKey(e => e.UserId);
+
+        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("tbAppRoleClaim");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("tbAppUserToken").HasKey(e => e.UserId);
+
+
 
         //Data Seeding
         modelBuilder.Seed();
         //
+        
         OnModelCreatingPartial(modelBuilder);
     }
 

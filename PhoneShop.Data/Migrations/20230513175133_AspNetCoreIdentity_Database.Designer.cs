@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneShop.Data.EF;
 
@@ -11,9 +12,10 @@ using PhoneShop.Data.EF;
 namespace PhoneShop.Data.Migrations
 {
     [DbContext(typeof(PhoneShopDbContext))]
-    partial class PhoneShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513175133_AspNetCoreIdentity_Database")]
+    partial class AspNetCoreIdentity_Database
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,13 +99,6 @@ namespace PhoneShop.Data.Migrations
                     b.HasKey("RoleId", "UserId");
 
                     b.ToTable("tbAppUserRole", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6"),
-                            UserId = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -149,16 +144,6 @@ namespace PhoneShop.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbAppRole", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6"),
-                            ConcurrencyStamp = "e050ce49-3a56-4bc7-800d-3684a9cb8240",
-                            Description = "Administrator role",
-                            Name = "admin",
-                            NormalizedName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.AppUser", b =>
@@ -225,27 +210,6 @@ namespace PhoneShop.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbAppUser", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "61d621cb-cc88-48bd-8a58-2bb98ce36b01",
-                            Dob = new DateTime(2003, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "duccong29092003@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Cong",
-                            LastName = "Do",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "duccong29092003@gmail.com",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAELJ/X7DMdDSNAT5O8VHivN0R6ZQA8XfZuVdnnE8k9wBzkvKnKvxV8jQgzBgAVzncAA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.Category", b =>
@@ -417,7 +381,7 @@ namespace PhoneShop.Data.Migrations
                     b.Property<DateTime>("ODate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("date")
-                        .HasDefaultValue(new DateTime(2023, 5, 14, 1, 4, 52, 971, DateTimeKind.Local).AddTicks(1966))
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 0, 51, 32, 789, DateTimeKind.Local).AddTicks(9851))
                         .HasColumnName("O_Date");
 
                     b.Property<int>("OStatus")
