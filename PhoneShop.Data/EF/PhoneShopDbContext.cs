@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.Entities;
-using PhoneShop.Data.Enum;
+using PhoneShop.Data.Enums;
+using PhoneShop.Data.Extensions;
 
 namespace PhoneShop.Data.EF;
 
@@ -98,7 +99,7 @@ public partial class PhoneShopDbContext : DbContext
             entity.Property(e => e.PId).HasColumnName("P_ID");
             entity.Property(e => e.OId).HasColumnName("O_ID");
             entity.Property(e => e.ODQuantity).HasColumnName("OD_Quantity");
-            entity.Property(e => e.ODPrice).HasColumnName("OD_Price");
+            entity.Property(e => e.ODPrice).HasColumnName("OD_Price").HasColumnType("decimal(18,2)");
 
             entity.HasOne(e => e.Order).WithMany(e => e.OrderDetails).HasForeignKey(e => e.OId);
             entity.HasOne(e => e.Product).WithMany(e => e.OrderDetails).HasForeignKey(e => e.PId);
@@ -113,13 +114,13 @@ public partial class PhoneShopDbContext : DbContext
 
             entity.Property(e => e.PId).HasColumnName("P_ID").UseIdentityColumn();
             entity.Property(e => e.PBatteryCapacity)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_BatteryCapacity");
             entity.Property(e => e.PCamera)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Camera");
             entity.Property(e => e.PColor)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Color");
             entity.Property(e => e.PConnectivity)
                 .HasMaxLength(50)
@@ -132,25 +133,25 @@ public partial class PhoneShopDbContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("P_Name");
             entity.Property(e => e.POperatingSystem)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Operating_System");
             entity.Property(e => e.PRam)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Ram");
             entity.Property(e => e.PResolution)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Resolution");
             entity.Property(e => e.PScreenSize)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Screen_Size");
             entity.Property(e => e.PStorage)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Storage");
             entity.Property(e => e.PWeight)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("P_Weights");
-            entity.Property(e => e.PPrice).HasColumnName("P_Price").IsRequired();
-            entity.Property(e => e.POriginalPrice).HasColumnName("P_OriginalPrice").IsRequired();
+            entity.Property(e => e.PPrice).HasColumnName("P_Price").IsRequired().HasColumnType("decimal(18,2)");
+            entity.Property(e => e.POriginalPrice).HasColumnName("P_OriginalPrice").IsRequired().HasColumnType("decimal(18,2)");
             entity.Property(e => e.PStock).HasColumnName("P_Stock").IsRequired().HasDefaultValue(0);
             entity.Property(e => e.MId).HasColumnName("M_Id");
 
@@ -168,6 +169,10 @@ public partial class PhoneShopDbContext : DbContext
 
         });
 
+
+        //Data Seeding
+        modelBuilder.Seed();
+        //
         OnModelCreatingPartial(modelBuilder);
     }
 

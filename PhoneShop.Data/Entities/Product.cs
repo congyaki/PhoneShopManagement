@@ -7,32 +7,32 @@ public partial class Product
 {
     public int PId { get; set; }
 
-    public string PName { get; set; } = null!;
+    public string PName { get; set; } 
     public int MId { get; set; }
 
-    public string PDescription { get; set; } = null!;
+    public string PDescription { get; set; } 
 
-    public string PColor { get; set; } = null!;
+    public string PColor { get; set; } 
 
-    public string PStorage { get; set; } = null!;
+    public string PStorage { get; set; } 
 
-    public string PRam { get; set; } = null!;
+    public string PRam { get; set; } 
 
-    public string PScreenSize { get; set; } = null!;
+    public string PScreenSize { get; set; } 
 
-    public string PResolution { get; set; } = null!;
+    public string PResolution { get; set; } 
 
-    public string POperatingSystem { get; set; } = null!;
+    public string POperatingSystem { get; set; } 
 
-    public string PCamera { get; set; } = null!;
+    public string PCamera { get; set; } 
 
-    public string PBatteryCapacity { get; set; } = null!;
+    public string PBatteryCapacity { get; set; } 
 
-    public string PConnectivity { get; set; } = null!;
+    public string PConnectivity { get; set; } 
 
-    public string PWeight { get; set; } = null!;
+    public string PWeight { get; set; } 
 
-    public string PDimension { get; set; } = null!;
+    public string PDimension { get; set; } 
 
     public decimal PPrice { get; set; }
     public decimal POriginalPrice { get; set; }

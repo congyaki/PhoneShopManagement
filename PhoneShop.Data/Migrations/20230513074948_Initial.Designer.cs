@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneShop.Data.EF;
 
@@ -11,9 +12,10 @@ using PhoneShop.Data.EF;
 namespace PhoneShop.Data.Migrations
 {
     [DbContext(typeof(PhoneShopDbContext))]
-    partial class PhoneShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513074948_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,46 +57,6 @@ namespace PhoneShop.Data.Migrations
                     b.HasKey("CId");
 
                     b.ToTable("tbCategory", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CId = 1,
-                            CName = "Flagship",
-                            CSortOrder = 1,
-                            CStatus = 1
-                        },
-                        new
-                        {
-                            CId = 2,
-                            CName = "Mid-range",
-                            CSortOrder = 2,
-                            CStatus = 1
-                        },
-                        new
-                        {
-                            CId = 3,
-                            CName = "Apple iPhone Pro series",
-                            CParentId = 1,
-                            CSortOrder = 1,
-                            CStatus = 1
-                        },
-                        new
-                        {
-                            CId = 4,
-                            CName = "Samsung Galaxy S series",
-                            CParentId = 1,
-                            CSortOrder = 2,
-                            CStatus = 1
-                        },
-                        new
-                        {
-                            CId = 5,
-                            CName = "Samsung Galaxy A series",
-                            CParentId = 2,
-                            CSortOrder = 3,
-                            CStatus = 1
-                        });
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.Manufacturer", b =>
@@ -135,48 +97,6 @@ namespace PhoneShop.Data.Migrations
                     b.HasKey("MId");
 
                     b.ToTable("tbManufacturer", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            MId = 1,
-                            MAddress = "129 Samsung-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do, Korea",
-                            MEmail = "support@Samsung.com",
-                            MName = "SamSung",
-                            MPhone = "+82-31-279-9577"
-                        },
-                        new
-                        {
-                            MId = 2,
-                            MAddress = "1 Apple Park Way, Cupertino, CA 95014, USA",
-                            MEmail = "info@apple.com",
-                            MName = "Apple",
-                            MPhone = "+1 (408) 996-1010"
-                        },
-                        new
-                        {
-                            MId = 3,
-                            MAddress = "Bantian, Longgang District, Shenzhen, China",
-                            MEmail = "support@oneplus.com",
-                            MName = "OnePlus",
-                            MPhone = "+86-755-28780808"
-                        },
-                        new
-                        {
-                            MId = 4,
-                            MAddress = "Building 3, Wangjing Park, Chaoyang District, Beijing, China",
-                            MEmail = "service.global@xiaomi.com",
-                            MName = "Xiaomi",
-                            MPhone = "+86-400-100-5678"
-                        },
-                        new
-                        {
-                            MId = 5,
-                            MAddress = "1600 Amphitheatre Parkway, Mountain View, California 94043, United States of America",
-                            MEmail = "support@google.com",
-                            MName = "OPPO",
-                            MPhone = "+1 650-253-0000"
-                        });
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.Order", b =>
@@ -191,7 +111,7 @@ namespace PhoneShop.Data.Migrations
                     b.Property<DateTime>("ODate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("date")
-                        .HasDefaultValue(new DateTime(2023, 5, 13, 14, 51, 56, 498, DateTimeKind.Local).AddTicks(1227))
+                        .HasDefaultValue(new DateTime(2023, 5, 13, 14, 49, 48, 399, DateTimeKind.Local).AddTicks(3628))
                         .HasColumnName("O_Date");
 
                     b.Property<int>("OStatus")
@@ -340,113 +260,6 @@ namespace PhoneShop.Data.Migrations
                     b.HasIndex("MId");
 
                     b.ToTable("tbProduct", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PId = 1,
-                            MId = 1,
-                            PBatteryCapacity = "5000 mAh",
-                            PCamera = "Quad camera: 108 MP + 10 MP + 10 MP + 12 MP",
-                            PColor = "Phantom Black",
-                            PConnectivity = "5G",
-                            PDescription = "Flagship phone from Samsung",
-                            PDimension = "165.1 x 75.6 x 8.9 mm",
-                            PName = "Samsung Galaxy S21 Ultra",
-                            POperatingSystem = "Android 11",
-                            POriginalPrice = 1399m,
-                            PPrice = 1199m,
-                            PRam = "12 GB",
-                            PResolution = "3200 x 1440 pixels",
-                            PScreenSize = "6.8 inches",
-                            PStock = 50,
-                            PStorage = "256 GB",
-                            PWeight = "227 g"
-                        },
-                        new
-                        {
-                            PId = 2,
-                            MId = 2,
-                            PBatteryCapacity = "3095 mAh",
-                            PCamera = "Triple camera: 12 MP + 12 MP + 12 MP",
-                            PColor = "Graphite",
-                            PConnectivity = "5G",
-                            PDescription = "Flagship phone from Apple",
-                            PDimension = "146.7 x 71.5 x 7.7 mm",
-                            PName = "iPhone 13 Pro",
-                            POperatingSystem = "iOS 15",
-                            POriginalPrice = 1099m,
-                            PPrice = 999m,
-                            PRam = "6 GB",
-                            PResolution = "2532 x 1170 pixels",
-                            PScreenSize = "6.1 inches",
-                            PStock = 30,
-                            PStorage = "128 GB",
-                            PWeight = "204 g"
-                        },
-                        new
-                        {
-                            PId = 3,
-                            MId = 3,
-                            PBatteryCapacity = "4500 mAh",
-                            PCamera = "Triple camera: 50 MP + 8 MP + 2 MP",
-                            PColor = "Gray Sierra",
-                            PConnectivity = "5G",
-                            PDescription = "Mid-range phone from OnePlus",
-                            PDimension = "158.9 x 73.2 x 8.3 mm",
-                            PName = "OnePlus Nord 2",
-                            POperatingSystem = "Android 11",
-                            POriginalPrice = 429m,
-                            PPrice = 399m,
-                            PRam = "8 GB",
-                            PResolution = "2400 x 1080 pixels",
-                            PScreenSize = "6.43 inches",
-                            PStock = 100,
-                            PStorage = "128 GB",
-                            PWeight = "189 g"
-                        },
-                        new
-                        {
-                            PId = 4,
-                            MId = 4,
-                            PBatteryCapacity = "5000 mAh",
-                            PCamera = "Quad camera: 64 MP + 8 MP + 2 MP + 2 MP",
-                            PColor = "Onyx Gray",
-                            PConnectivity = "4G",
-                            PDescription = "Mid-range phone from Xiaomi",
-                            PDimension = "164.1 x 76.9 x 8.5 mm",
-                            PName = "Xiaomi Redmi Note 11 Pro",
-                            POperatingSystem = "Android 11",
-                            POriginalPrice = 349m,
-                            PPrice = 299m,
-                            PRam = "6 GB",
-                            PResolution = "2400 x 1080 pixels",
-                            PScreenSize = "6.67 inches",
-                            PStock = 150,
-                            PStorage = "64 GB",
-                            PWeight = "193 g"
-                        },
-                        new
-                        {
-                            PId = 5,
-                            MId = 5,
-                            PBatteryCapacity = "5000 mAh",
-                            PCamera = "Triple camera: 13 MP + 2 MP + 2 MP",
-                            PColor = "Crystal Black",
-                            PConnectivity = "4G",
-                            PDescription = "Budget phone from OPPO",
-                            PDimension = "163.6 x 75.7 x 8.4 mm",
-                            PName = "OPPO A54",
-                            POperatingSystem = "Android 10",
-                            POriginalPrice = 249m,
-                            PPrice = 199m,
-                            PRam = "4 GB",
-                            PResolution = "1600 x 720 pixels",
-                            PScreenSize = "6.51 inches",
-                            PStock = 200,
-                            PStorage = "128 GB",
-                            PWeight = "192 g"
-                        });
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.ProductInCategory", b =>
@@ -462,33 +275,6 @@ namespace PhoneShop.Data.Migrations
                     b.HasIndex("PId");
 
                     b.ToTable("tbProductInCategory", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CId = 1,
-                            PId = 1
-                        },
-                        new
-                        {
-                            CId = 1,
-                            PId = 2
-                        },
-                        new
-                        {
-                            CId = 2,
-                            PId = 3
-                        },
-                        new
-                        {
-                            CId = 2,
-                            PId = 4
-                        },
-                        new
-                        {
-                            CId = 3,
-                            PId = 5
-                        });
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.OrderDetail", b =>

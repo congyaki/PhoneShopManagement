@@ -7,13 +7,13 @@ public partial class Manufacturer
 {
     public int MId { get; set; }
 
-    public string MName { get; set; } = null!;
+    public string MName { get; set; }
 
-    public string MAddress { get; set; } = null!;
+    public string MAddress { get; set; } 
 
-    public string MEmail { get; set; } = null!;
+    public string MEmail { get; set; } 
 
-    public string MPhone { get; set; } = null!;
+    public string MPhone { get; set; } 
 
     public List<Product> Products { get; set; }
 }

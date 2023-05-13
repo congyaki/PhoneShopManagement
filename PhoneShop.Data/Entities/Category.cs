@@ -1,4 +1,4 @@
-﻿using PhoneShop.Data.Enum;
+﻿using PhoneShop.Data.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +8,7 @@ public partial class Category
 {
     public int CId { get; set; }
 
-    public string CName { get; set; } = null!;
+    public string CName { get; set; }
     public int CSortOrder { get; set; }
     public int? CParentId { get; set; }
     public Status CStatus { get; set; }
