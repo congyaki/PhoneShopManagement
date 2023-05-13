@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhoneShop.Data.Enum
+namespace PhoneShop.Data.Enums
 {
     public enum Status
     {
-        InActive,
+        Inactive,
         Active
     }
 }
