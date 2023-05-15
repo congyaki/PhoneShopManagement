@@ -5,9 +5,15 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.AdminApp", "PhoneShopManagement\PhoneShop.AdminApp.csproj", "{9663CA1D-8EE0-4DAF-8EF0-1513E1EF2893}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneShop.Data", "PhoneShop.Data\PhoneShop.Data.csproj", "{89367656-B58A-40BC-9E98-9E706B8E4404}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.Data", "PhoneShop.Data\PhoneShop.Data.csproj", "{89367656-B58A-40BC-9E98-9E706B8E4404}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneShop.WebApp", "PhoneShop.WebApp\PhoneShop.WebApp.csproj", "{CDF03D21-7723-4707-8725-063E87357D9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.WebApp", "PhoneShop.WebApp\PhoneShop.WebApp.csproj", "{CDF03D21-7723-4707-8725-063E87357D9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.BusinessLogic", "PhoneShop.BusinessLogic\PhoneShop.BusinessLogic.csproj", "{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneShop.Utilities", "PhoneShop.Utilities\PhoneShop.Utilities.csproj", "{9F70BD2F-C4BE-4119-8343-9633658AA370}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneShop.ViewModels", "PhoneShop.ViewModels\PhoneShop.ViewModels.csproj", "{2F7F2E5A-55BB-45EE-9312-A7A179742078}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{CDF03D21-7723-4707-8725-063E87357D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDF03D21-7723-4707-8725-063E87357D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDF03D21-7723-4707-8725-063E87357D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F70BD2F-C4BE-4119-8343-9633658AA370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F70BD2F-C4BE-4119-8343-9633658AA370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F70BD2F-C4BE-4119-8343-9633658AA370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F70BD2F-C4BE-4119-8343-9633658AA370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F7F2E5A-55BB-45EE-9312-A7A179742078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7F2E5A-55BB-45EE-9312-A7A179742078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F7F2E5A-55BB-45EE-9312-A7A179742078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F7F2E5A-55BB-45EE-9312-A7A179742078}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

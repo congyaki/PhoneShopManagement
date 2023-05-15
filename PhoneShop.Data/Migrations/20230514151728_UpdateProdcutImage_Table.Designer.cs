@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneShop.Data.EF;
 
@@ -11,9 +12,10 @@ using PhoneShop.Data.EF;
 namespace PhoneShop.Data.Migrations
 {
     [DbContext(typeof(PhoneShopDbContext))]
-    partial class PhoneShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230514151728_UpdateProdcutImage_Table")]
+    partial class UpdateProdcutImage_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +156,7 @@ namespace PhoneShop.Data.Migrations
                         new
                         {
                             Id = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6"),
-                            ConcurrencyStamp = "be9cf751-c304-431c-8fc7-97601f495148",
+                            ConcurrencyStamp = "8f9fe24d-972d-45b7-9f39-2946bae9d663",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -231,7 +233,7 @@ namespace PhoneShop.Data.Migrations
                         {
                             Id = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea26bffa-8a41-4463-b409-a76f484df6d7",
+                            ConcurrencyStamp = "0f4ac792-9a63-4605-b1fc-063da1024051",
                             Dob = new DateTime(2003, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "duccong29092003@gmail.com",
                             EmailConfirmed = true,
@@ -240,7 +242,7 @@ namespace PhoneShop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "duccong29092003@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJzg4/4ShDR2Na+6kH/5fj/EcFiBthJRdYDdB4MnAScMrwVGjMzd98hvb6gBDm0HAw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAekddDz9TyrEonEGgpfDQWBV8FeYJ0SEu/ybxxfTtS0La10JmTEQBdNKnprRqPNIQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -692,7 +694,7 @@ namespace PhoneShop.Data.Migrations
 
                     b.Property<bool>("PIIsDefault")
                         .HasColumnType("bit")
-                        .HasColumnName("PI_IsDefault");
+                        .HasColumnName("PI_SortOrder");
 
                     b.Property<string>("PIPath")
                         .IsRequired()
@@ -701,12 +703,10 @@ namespace PhoneShop.Data.Migrations
                         .HasColumnName("PI_Path");
 
                     b.Property<int>("PISortOrder")
-                        .HasColumnType("int")
-                        .HasColumnName("PI_SortOrder");
+                        .HasColumnType("int");
 
                     b.Property<int>("PId")
-                        .HasColumnType("int")
-                        .HasColumnName("P_Id");
+                        .HasColumnType("int");
 
                     b.HasKey("PIId");
 

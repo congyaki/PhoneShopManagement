@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneShop.Data.EF;
 
@@ -11,9 +12,10 @@ using PhoneShop.Data.EF;
 namespace PhoneShop.Data.Migrations
 {
     [DbContext(typeof(PhoneShopDbContext))]
-    partial class PhoneShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230514151245_AddProdcutImage_Table")]
+    partial class AddProdcutImage_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +156,7 @@ namespace PhoneShop.Data.Migrations
                         new
                         {
                             Id = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6"),
-                            ConcurrencyStamp = "be9cf751-c304-431c-8fc7-97601f495148",
+                            ConcurrencyStamp = "e9c87203-0812-4a32-a0a7-4bcf5b3ed756",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -231,7 +233,7 @@ namespace PhoneShop.Data.Migrations
                         {
                             Id = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea26bffa-8a41-4463-b409-a76f484df6d7",
+                            ConcurrencyStamp = "a944144c-175b-4977-b02d-ab0b56c09a8a",
                             Dob = new DateTime(2003, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "duccong29092003@gmail.com",
                             EmailConfirmed = true,
@@ -240,7 +242,7 @@ namespace PhoneShop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "duccong29092003@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJzg4/4ShDR2Na+6kH/5fj/EcFiBthJRdYDdB4MnAScMrwVGjMzd98hvb6gBDm0HAw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENcwyQjo1VaSbNntq2fduslC2hy0jSFXwdjGsPAKqTqbPtxJBeged249HVNIdx1mJw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -679,34 +681,28 @@ namespace PhoneShop.Data.Migrations
                 {
                     b.Property<int>("PIId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("PI_Id");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PIId"), 1L, 1);
 
                     b.Property<string>("PICaption")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("PI_Caption");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("PIIsDefault")
-                        .HasColumnType("bit")
-                        .HasColumnName("PI_IsDefault");
+                        .HasColumnType("bit");
 
                     b.Property<string>("PIPath")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("PI_Path");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("PISortOrder")
-                        .HasColumnType("int")
-                        .HasColumnName("PI_SortOrder");
+                        .HasColumnType("int");
 
                     b.Property<int>("PId")
-                        .HasColumnType("int")
-                        .HasColumnName("P_Id");
+                        .HasColumnType("int");
 
                     b.HasKey("PIId");
 

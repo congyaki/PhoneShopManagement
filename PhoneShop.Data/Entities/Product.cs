@@ -38,6 +38,8 @@ public partial class Product
     public decimal POriginalPrice { get; set; }
     public int PStock { get; set; }
 
+
+    public List<ProductImage> ProductImages { get; set; }
     public List<ProductInCategory> ProductInCategories { get; set; }
     public List<OrderDetail> OrderDetails { get; set; }
     public Manufacturer Manufacturer { get; set; }
