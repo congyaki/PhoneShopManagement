@@ -57,7 +57,8 @@ namespace PhoneShop.BusinessLogic.Catalog.Products
                 };
             }
             _context.Products.Add(product);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return product.PId;
         }
         public async Task<int> Update(ProductUpdateRequest request)
         {
@@ -105,6 +106,30 @@ namespace PhoneShop.BusinessLogic.Catalog.Products
 
             _context.Products.Remove(product);
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task<ProductViewModel> GetById(int productId, string languageId)
+        {
+            var product = await _context.Products.FindAsync(productId);
+
+            var productViewModel = new ProductViewModel()
+            {
+                PId = product.PId,
+                PName = product.PName,
+                PDescription = product.PDescription,
+                PColor = product.PColor,
+                PStorage = product.PStorage,
+                PRam = product.PRam,
+                PScreenSize = product.PScreenSize,
+                PResolution = product.PResolution,
+                POperatingSystem = product.POperatingSystem,
+                PCamera = product.PCamera,
+                PBatteryCapacity = product.PBatteryCapacity,
+                PConnectivity = product.PConnectivity,
+                PWeight = product.PWeight,
+                PDimension = product.PDimension,
+        };
+            return productViewModel;
         }
 
         public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
