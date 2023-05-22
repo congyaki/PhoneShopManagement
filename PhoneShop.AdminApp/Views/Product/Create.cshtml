@@ -1,0 +1,105 @@
+﻿@model PhoneShop.Data.Entities.Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PName" class="control-label"></label>
+                <input asp-for="PName" class="form-control" />
+                <span asp-validation-for="PName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MId" class="control-label"></label>
+                <select asp-for="MId" class ="form-control" asp-items="ViewBag.MId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PDescription" class="control-label"></label>
+                <input asp-for="PDescription" class="form-control" />
+                <span asp-validation-for="PDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PColor" class="control-label"></label>
+                <input asp-for="PColor" class="form-control" />
+                <span asp-validation-for="PColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PStorage" class="control-label"></label>
+                <input asp-for="PStorage" class="form-control" />
+                <span asp-validation-for="PStorage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PRam" class="control-label"></label>
+                <input asp-for="PRam" class="form-control" />
+                <span asp-validation-for="PRam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PScreenSize" class="control-label"></label>
+                <input asp-for="PScreenSize" class="form-control" />
+                <span asp-validation-for="PScreenSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PResolution" class="control-label"></label>
+                <input asp-for="PResolution" class="form-control" />
+                <span asp-validation-for="PResolution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="POperatingSystem" class="control-label"></label>
+                <input asp-for="POperatingSystem" class="form-control" />
+                <span asp-validation-for="POperatingSystem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PCamera" class="control-label"></label>
+                <input asp-for="PCamera" class="form-control" />
+                <span asp-validation-for="PCamera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PBatteryCapacity" class="control-label"></label>
+                <input asp-for="PBatteryCapacity" class="form-control" />
+                <span asp-validation-for="PBatteryCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PConnectivity" class="control-label"></label>
+                <input asp-for="PConnectivity" class="form-control" />
+                <span asp-validation-for="PConnectivity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PWeight" class="control-label"></label>
+                <input asp-for="PWeight" class="form-control" />
+                <span asp-validation-for="PWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PDimension" class="control-label"></label>
+                <input asp-for="PDimension" class="form-control" />
+                <span asp-validation-for="PDimension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PPrice" class="control-label"></label>
+                <input asp-for="PPrice" class="form-control" />
+                <span asp-validation-for="PPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="POriginalPrice" class="control-label"></label>
+                <input asp-for="POriginalPrice" class="form-control" />
+                <span asp-validation-for="POriginalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

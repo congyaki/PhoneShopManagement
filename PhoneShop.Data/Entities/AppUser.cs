@@ -13,7 +13,6 @@ namespace PhoneShop.Data.Entities
         public string LastName { get; set; }
         public DateTime Dob { get; set; }
 
-        public List<Order> Orders { get; set; }
 
     }
 }

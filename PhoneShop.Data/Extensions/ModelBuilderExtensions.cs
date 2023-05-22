@@ -23,11 +23,11 @@ namespace PhoneShop.Data.Extensions
                 new Manufacturer { MId = 5, MName = "OPPO", MAddress = "1600 Amphitheatre Parkway, Mountain View, California 94043, United States of America", MEmail = "support@google.com", MPhone = "+1 650-253-0000" }
             );
             modelBuilder.Entity<Category>().HasData(
-                new Category { CId = 1, CName = "Flagship", CSortOrder = 1, CParentId = null, CStatus = Status.Active },
-                new Category { CId = 2, CName = "Mid-range", CSortOrder = 2, CParentId = null, CStatus = Status.Active },
-                new Category { CId = 3, CName = "Apple iPhone Pro series", CSortOrder = 1, CParentId = 1, CStatus = Status.Active },
-                new Category { CId = 4, CName = "Samsung Galaxy S series", CSortOrder = 2, CParentId = 1, CStatus = Status.Active },
-                new Category { CId = 5, CName = "Samsung Galaxy A series", CSortOrder = 3, CParentId = 2, CStatus = Status.Active }
+                new Category { CId = 1, CName = "Flagship", CSortOrder = 1, CParentId = null},
+                new Category { CId = 2, CName = "Mid-range", CSortOrder = 2, CParentId = null},
+                new Category { CId = 3, CName = "Apple iPhone Pro series", CSortOrder = 1, CParentId = 1},
+                new Category { CId = 4, CName = "Samsung Galaxy S series", CSortOrder = 2, CParentId = 1 },
+                new Category { CId = 5, CName = "Samsung Galaxy A series", CSortOrder = 3, CParentId = 2 }
                 );
 
             modelBuilder.Entity<Product>().HasData(
@@ -43,6 +43,14 @@ namespace PhoneShop.Data.Extensions
                 new ProductInCategory { PId = 3, CId = 2 },
                 new ProductInCategory { PId = 4, CId = 2 },
                 new ProductInCategory { PId = 5, CId = 3 }
+                );
+
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer { CusId=1, CusName = "John Doe", CusAddress = "123 Main St", CusEmail = "john.doe@example.com", CusPhone = "555-1234" },
+                new Customer { CusId=2, CusName = "Jane Smith", CusAddress = "456 Park Ave", CusEmail = "jane.smith@example.com", CusPhone = "555-5678" },
+                new Customer { CusId=3, CusName = "Bob Johnson", CusAddress = "789 Elm St", CusEmail = "bob.johnson@example.com", CusPhone = "555-9012" },
+                new Customer { CusId=4, CusName = "Ann Lee", CusAddress = "321 Oak Ln", CusEmail = "ann.lee@example.com", CusPhone = "555-3456" },
+                new Customer { CusId=5, CusName = "Tom Wilson", CusAddress = "654 Maple Rd", CusEmail = "tom.wilson@example.com", CusPhone = "555-7890" }
                 );
 
 

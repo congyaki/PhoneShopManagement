@@ -1,0 +1,107 @@
+﻿@using PhoneShop.Data.Entities;
+@model Order
+
+<h2>Create Order</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group row">
+        <div class="col-sm-12 col-md-3">
+            @Html.LabelFor(m => m.OId)
+        </div>
+        <div class="col-sm-12 col-md-9">
+            @Html.TextBoxFor(m => m.OId, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12 col-md-3">
+            @Html.LabelFor(m => m.CusId)
+        </div>
+        <div class="col-sm-12 col-md-9">
+            @Html.TextBoxFor(m => m.CusId, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12 col-md-3">
+            @Html.LabelFor(m => m.ODate)
+        </div>
+        <div class="col-sm-12 col-md-9">
+            @Html.TextBoxFor(m => m.ODate, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-12 col-md-3">
+            @Html.LabelFor(m => m.OStatus)
+        </div>
+        <div class="col-sm-12 col-md-9">
+            <select asp-for="OStatus" class="form-control" asp-items="ViewBag.Ostatus"></select>
+        </div>
+    </div>
+
+    <style>
+        .order-details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .order-details-title {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+
+    <div class="order-details-header">
+        <h3 class="order-details-title">Order Details</h3>
+        <button type="button" class="btn btn-success" id="add-order-detail">Add</button>
+    </div>
+
+    <table class="table" id="order-details-table">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.OrderDetails.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(m => m.OrderDetails[i].PId, new { @class = "form-control"})
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.OrderDetails[i].ODQuantity, new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.OrderDetails[i].ODPrice, new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @if (i >= 0)
+                        {
+                            <button type="button" class="btn btn-danger">Remove</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+}
+
+
+@section Scripts {
+   <script src="~/js/order/ordercreate.js"></script>
+   <script>
+       $(document).ready(function (){
+           orderUpdateCtr.Init();
+       });
+   </script>
+}

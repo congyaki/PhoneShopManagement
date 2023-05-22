@@ -21,6 +21,7 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Gu
     }
 
     public virtual DbSet<Category> Categories { get; set; }
+    public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<Manufacturer> Manufacturers { get; set; }
 
@@ -51,7 +52,6 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Gu
                 .HasColumnName("C_Name");
             entity.Property(e => e.CSortOrder).HasColumnName("C_SortOrder");
             entity.Property(e => e.CParentId).HasColumnName("C_ParentId");
-            entity.Property(e => e.CStatus).HasDefaultValue(Status.Active).HasColumnName("C_Status");
         });
 
 
@@ -79,6 +79,17 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Gu
 
         });
 
+        modelBuilder.Entity<Customer>(entity =>
+        {
+            entity.ToTable("tbCustomer");
+            entity.HasKey(e => e.CusId);
+            entity.Property(e => e.CusId).HasColumnName("Cus_ID").UseIdentityColumn();
+            entity.Property(e => e.CusName).HasColumnName("Cus_Name").HasMaxLength(50).IsRequired();
+            entity.Property(e => e.CusAddress).HasColumnName("Cus_Address").HasMaxLength(200).IsRequired();
+            entity.Property(e => e.CusEmail).HasColumnName("Cus_Email").HasMaxLength(50).IsRequired();
+            entity.Property(e => e.CusPhone).HasColumnName("Cus_Phone").HasMaxLength(20).IsRequired();
+        });
+
         modelBuilder.Entity<Order>(entity =>
         {
             entity.HasKey(e => e.OId);
@@ -88,8 +99,9 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Gu
             entity.Property(e => e.OId).HasColumnName("O_ID").UseIdentityColumn();
             entity.Property(e => e.ODate).HasColumnType("date").HasColumnName("O_Date");
             entity.Property(e => e.OStatus).HasColumnName("O_Status");
+            entity.Property(e => e.CusId).HasColumnName("Cus_ID");
 
-            entity.HasOne(e => e.AppUser).WithMany(e => e.Orders).HasForeignKey(e => e.UserId);
+            entity.HasOne(e => e.Customer).WithMany(e => e.OrderList).HasForeignKey(e => e.CusId);
 
         });
 

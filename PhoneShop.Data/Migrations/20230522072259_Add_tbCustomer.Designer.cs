@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneShop.Data.EF;
 
@@ -11,9 +12,10 @@ using PhoneShop.Data.EF;
 namespace PhoneShop.Data.Migrations
 {
     [DbContext(typeof(PhoneShopDbContext))]
-    partial class PhoneShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230522072259_Add_tbCustomer")]
+    partial class Add_tbCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +156,7 @@ namespace PhoneShop.Data.Migrations
                         new
                         {
                             Id = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6"),
-                            ConcurrencyStamp = "3e703517-1d61-4678-a524-2ca9909adb58",
+                            ConcurrencyStamp = "0b04c23f-7451-49d9-bf18-1670e8ec0ef1",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -231,7 +233,7 @@ namespace PhoneShop.Data.Migrations
                         {
                             Id = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7011fc2-717c-4896-add4-a37883b336d7",
+                            ConcurrencyStamp = "3f5bf929-bfc0-4045-bc02-417942911d26",
                             Dob = new DateTime(2003, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "duccong29092003@gmail.com",
                             EmailConfirmed = true,
@@ -240,7 +242,7 @@ namespace PhoneShop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "duccong29092003@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDfu09TGTdpEXZ3xrg1YRqKheRMp3OR5LJ/GX7e9ZoO3Tl2kn4LzwglFThwa5dtkRA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOMATWYqLPrMp/BnklQzrWMDgB/vMssR4nDN+tbKFL2RsAqVBB94OpMZQG67SGWVbw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -483,9 +485,11 @@ namespace PhoneShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OId"), 1L, 1);
 
+                    b.Property<Guid?>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("CusId")
-                        .HasColumnType("int")
-                        .HasColumnName("Cus_ID");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ODate")
                         .HasColumnType("date")
@@ -495,7 +499,12 @@ namespace PhoneShop.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("O_Status");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("OId");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CusId");
 
@@ -829,6 +838,10 @@ namespace PhoneShop.Data.Migrations
 
             modelBuilder.Entity("PhoneShop.Data.Entities.Order", b =>
                 {
+                    b.HasOne("PhoneShop.Data.Entities.AppUser", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("PhoneShop.Data.Entities.Customer", "Customer")
                         .WithMany("OrderList")
                         .HasForeignKey("CusId")
@@ -896,6 +909,11 @@ namespace PhoneShop.Data.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("PhoneShop.Data.Entities.AppUser", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.Category", b =>

@@ -1,0 +1,42 @@
+﻿@model PhoneShop.Data.Entities.Order
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OId" />
+            <div class="form-group">
+                <label asp-for="ODate" class="control-label"></label>
+                <input asp-for="ODate" class="form-control" />
+                <span asp-validation-for="ODate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CusId" class="control-label"></label>
+                <select asp-for="CusId" class="form-control" asp-items="ViewBag.CustomerID"></select>
+                <span asp-validation-for="CusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OStatus" class="control-label"></label>
+                <select asp-for="OStatus" class="form-control" asp-items="ViewBag.OStatus"></select>
+                <span asp-validation-for="OStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

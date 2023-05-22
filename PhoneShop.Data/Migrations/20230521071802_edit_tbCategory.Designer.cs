@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneShop.Data.EF;
 
@@ -11,9 +12,10 @@ using PhoneShop.Data.EF;
 namespace PhoneShop.Data.Migrations
 {
     [DbContext(typeof(PhoneShopDbContext))]
-    partial class PhoneShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230521071802_edit_tbCategory")]
+    partial class edit_tbCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +156,7 @@ namespace PhoneShop.Data.Migrations
                         new
                         {
                             Id = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6"),
-                            ConcurrencyStamp = "3e703517-1d61-4678-a524-2ca9909adb58",
+                            ConcurrencyStamp = "9225fe69-8f63-4f26-b10d-64760ca99d49",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -231,7 +233,7 @@ namespace PhoneShop.Data.Migrations
                         {
                             Id = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7011fc2-717c-4896-add4-a37883b336d7",
+                            ConcurrencyStamp = "b0ee0f33-6cf1-4fd1-a06f-b08589dfeaed",
                             Dob = new DateTime(2003, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "duccong29092003@gmail.com",
                             EmailConfirmed = true,
@@ -240,7 +242,7 @@ namespace PhoneShop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "duccong29092003@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDfu09TGTdpEXZ3xrg1YRqKheRMp3OR5LJ/GX7e9ZoO3Tl2kn4LzwglFThwa5dtkRA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBB+R9RtDC2iKOhZNas/yUlIxrI1gIcAMouRqfZRQ+duU415yIedxPZcRXoOiNBJQQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -309,86 +311,6 @@ namespace PhoneShop.Data.Migrations
                             CName = "Samsung Galaxy A series",
                             CParentId = 2,
                             CSortOrder = 3
-                        });
-                });
-
-            modelBuilder.Entity("PhoneShop.Data.Entities.Customer", b =>
-                {
-                    b.Property<int>("CusId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Cus_ID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CusId"), 1L, 1);
-
-                    b.Property<string>("CusAddress")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("Cus_Address");
-
-                    b.Property<string>("CusEmail")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("Cus_Email");
-
-                    b.Property<string>("CusName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("Cus_Name");
-
-                    b.Property<string>("CusPhone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("Cus_Phone");
-
-                    b.HasKey("CusId");
-
-                    b.ToTable("tbCustomer", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CusId = 1,
-                            CusAddress = "123 Main St",
-                            CusEmail = "john.doe@example.com",
-                            CusName = "John Doe",
-                            CusPhone = "555-1234"
-                        },
-                        new
-                        {
-                            CusId = 2,
-                            CusAddress = "456 Park Ave",
-                            CusEmail = "jane.smith@example.com",
-                            CusName = "Jane Smith",
-                            CusPhone = "555-5678"
-                        },
-                        new
-                        {
-                            CusId = 3,
-                            CusAddress = "789 Elm St",
-                            CusEmail = "bob.johnson@example.com",
-                            CusName = "Bob Johnson",
-                            CusPhone = "555-9012"
-                        },
-                        new
-                        {
-                            CusId = 4,
-                            CusAddress = "321 Oak Ln",
-                            CusEmail = "ann.lee@example.com",
-                            CusName = "Ann Lee",
-                            CusPhone = "555-3456"
-                        },
-                        new
-                        {
-                            CusId = 5,
-                            CusAddress = "654 Maple Rd",
-                            CusEmail = "tom.wilson@example.com",
-                            CusName = "Tom Wilson",
-                            CusPhone = "555-7890"
                         });
                 });
 
@@ -483,10 +405,6 @@ namespace PhoneShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OId"), 1L, 1);
 
-                    b.Property<int>("CusId")
-                        .HasColumnType("int")
-                        .HasColumnName("Cus_ID");
-
                     b.Property<DateTime>("ODate")
                         .HasColumnType("date")
                         .HasColumnName("O_Date");
@@ -495,9 +413,12 @@ namespace PhoneShop.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("O_Status");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("OId");
 
-                    b.HasIndex("CusId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("tbOrder", (string)null);
                 });
@@ -829,13 +750,13 @@ namespace PhoneShop.Data.Migrations
 
             modelBuilder.Entity("PhoneShop.Data.Entities.Order", b =>
                 {
-                    b.HasOne("PhoneShop.Data.Entities.Customer", "Customer")
-                        .WithMany("OrderList")
-                        .HasForeignKey("CusId")
+                    b.HasOne("PhoneShop.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.OrderDetail", b =>
@@ -898,14 +819,14 @@ namespace PhoneShop.Data.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("PhoneShop.Data.Entities.AppUser", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("PhoneShop.Data.Entities.Category", b =>
                 {
                     b.Navigation("ProductInCategories");
-                });
-
-            modelBuilder.Entity("PhoneShop.Data.Entities.Customer", b =>
-                {
-                    b.Navigation("OrderList");
                 });
 
             modelBuilder.Entity("PhoneShop.Data.Entities.Manufacturer", b =>
