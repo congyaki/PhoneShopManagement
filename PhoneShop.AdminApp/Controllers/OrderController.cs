@@ -55,13 +55,9 @@ namespace PhoneShop.AdminApp.Controllers
         // GET: Order/Create
         public IActionResult Create()
         {
-            var order = new Order();
-            order.OrderDetails = new List<OrderDetail>();
-            order.OrderDetails.Add(new OrderDetail());
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CusId", "CusName");
             var orderStatus = Enum.GetValues(typeof(OrderStatus));
             ViewData["OStatus"] = new SelectList(orderStatus);
-            return View(order);
+            return View();
         }
 
         // POST: Order/Create
@@ -71,14 +67,12 @@ namespace PhoneShop.AdminApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OId,ODate,CusId,OStatus")] Order order)
         {
-            var c = order;
             if (ModelState.IsValid)
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerID"] = new SelectList(_context.Customers, "CusId", "CusName");
             var orderStatus = Enum.GetValues(typeof(OrderStatus));
             ViewData["OStatus"] = new SelectList(orderStatus);
             return View(order);

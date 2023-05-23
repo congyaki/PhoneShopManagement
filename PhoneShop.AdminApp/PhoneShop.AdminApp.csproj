@@ -21,7 +21,6 @@
     <ProjectReference Include="..\PhoneShop.BusinessLogic\PhoneShop.BusinessLogic.csproj" />
     <ProjectReference Include="..\PhoneShop.Data\PhoneShop.Data.csproj" />
     <ProjectReference Include="..\PhoneShop.Utilities\PhoneShop.Utilities.csproj" />
-    <ProjectReference Include="..\PhoneShop.ViewModels\PhoneShop.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

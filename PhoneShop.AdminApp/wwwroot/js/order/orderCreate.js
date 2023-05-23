@@ -3,24 +3,22 @@
         this.RegisterEvent();
     },
     RegisterEvent: function () {
-        $('#add-order-detail').on('click', function () {
-            // Tạo một hàng mới
-            var newRow = $('<tr>');
-            var productIdCell = $('<td>').append($('<input>').attr('name', 'OrderDetails[' + $('.order-detail').length + '].PId').addClass('form-control'));
-            var quantityCell = $('<td>').append($('<input>').attr('name', 'OrderDetails[' + $('.order-detail').length + '].ODQuantity').addClass('form-control'));
-            var priceCell = $('<td>').append($('<input>').attr('name', 'OrderDetails[' + $('.order-detail').length + '].ODPrice').addClass('form-control'));
-            var removeBtnCell = $('<td>').append($('<button>').addClass('btn btn-danger remove-order-detail').text('Remove'));
-            newRow.append(productIdCell);
-            newRow.append(quantityCell);
-            newRow.append(priceCell);
-            newRow.append(removeBtnCell);
-            // Thêm hàng mới vào cuối bảng
-            $('#order-details-table tbody').append(newRow);
+        var currentIndex = $('#order-details-table tbody tr').length;
+
+        $(document).on('click', '#add-order-detail', function () {
+            var row = '<tr>' +
+                '<td><input class="form-control" name="OrderDetails[' + currentIndex + '].PId" type="text" /></td>' +
+                '<td><input class="form-control" name="OrderDetails[' + currentIndex + '].ODQuantity" type="text" /></td>' +
+                '<td><input class="form-control" name="OrderDetails[' + currentIndex + '].ODPrice" type="text" /></td>' +
+                '<td><button type="button" class="btn btn-danger">Remove</button></td>' +
+                '</tr>';
+            $('#order-details-table tbody').append(row);
+            currentIndex++;
         });
 
-        // Xóa hàng
-        $('#order-details-table').on('click', '.remove-order-detail', function () {
+        $(document).on('click', '#order-details-table tbody tr button', function () {
             $(this).closest('tr').remove();
+            currentIndex--;
         });
     }
 };

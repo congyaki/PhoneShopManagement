@@ -1,107 +1,40 @@
-﻿@using PhoneShop.Data.Entities;
-@model Order
+﻿@model PhoneShop.Data.Entities.Order
 
-<h2>Create Order</h2>
-
-@using (Html.BeginForm())
-{
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-3">
-            @Html.LabelFor(m => m.OId)
-        </div>
-        <div class="col-sm-12 col-md-9">
-            @Html.TextBoxFor(m => m.OId, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-3">
-            @Html.LabelFor(m => m.CusId)
-        </div>
-        <div class="col-sm-12 col-md-9">
-            @Html.TextBoxFor(m => m.CusId, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-3">
-            @Html.LabelFor(m => m.ODate)
-        </div>
-        <div class="col-sm-12 col-md-9">
-            @Html.TextBoxFor(m => m.ODate, new { @class = "form-control" })
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-3">
-            @Html.LabelFor(m => m.OStatus)
-        </div>
-        <div class="col-sm-12 col-md-9">
-            <select asp-for="OStatus" class="form-control" asp-items="ViewBag.Ostatus"></select>
-        </div>
-    </div>
-
-    <style>
-        .order-details-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .order-details-title {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-    </style>
-
-    <div class="order-details-header">
-        <h3 class="order-details-title">Order Details</h3>
-        <button type="button" class="btn btn-success" id="add-order-detail">Add</button>
-    </div>
-
-    <table class="table" id="order-details-table">
-        <thead>
-            <tr>
-                <th>Product Id</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.OrderDetails.Count; i++)
-            {
-                <tr>
-                    <td>
-                        @Html.TextBoxFor(m => m.OrderDetails[i].PId, new { @class = "form-control"})
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(m => m.OrderDetails[i].ODQuantity, new { @class = "form-control" })
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(m => m.OrderDetails[i].ODPrice, new { @class = "form-control" })
-                    </td>
-                    <td>
-                        @if (i >= 0)
-                        {
-                            <button type="button" class="btn btn-danger">Remove</button>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <button type="submit" class="btn btn-primary">Create</button>
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h1>Create</h1>
 
-@section Scripts {
-   <script src="~/js/order/ordercreate.js"></script>
-   <script>
-       $(document).ready(function (){
-           orderUpdateCtr.Init();
-       });
-   </script>
-}
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CusId" class="control-label"></label>
+                <input asp-for="CusId" class="form-control" type="number"/>
+                <span asp-validation-for="CusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ODate" class="control-label"></label>
+                <input asp-for="ODate" class="form-control" />
+                <span asp-validation-for="ODate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OStatus" class="control-label"></label>
+                <select asp-for="OStatus" class="form-control" asp-items="ViewBag.Ostatus"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

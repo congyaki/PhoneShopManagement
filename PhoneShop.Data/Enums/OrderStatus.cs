@@ -8,11 +8,9 @@ namespace PhoneShop.Data.Enums
 {
     public enum OrderStatus
     {
-        InProgress,
-        Confirmed,
-        Shipping,
-        Success,
-        Cenceled
+        Tại_Cửa_Hàng,
+        Ship
+
 
     }
 }
