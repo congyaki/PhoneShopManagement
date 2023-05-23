@@ -75,7 +75,7 @@ namespace PhoneShop.AdminApp.Controllers
             }
             var orderStatus = Enum.GetValues(typeof(OrderStatus));
             ViewData["OStatus"] = new SelectList(orderStatus);
-            return View(order);
+            return RedirectToAction("Create", "OrderDetail");
         }
 
         // GET: Order/Edit/5
