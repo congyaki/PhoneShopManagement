@@ -61,8 +61,6 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // POST: Order/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OId,ODate,CusId,OStatus")] Order order)
@@ -71,11 +69,12 @@ namespace PhoneShop.AdminApp.Controllers
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                int lastOrderId = await _context.Orders.MaxAsync(o => o.OId);
+                return RedirectToAction("Create", "OrderDetail", new { newOrderID = lastOrderId });
             }
             var orderStatus = Enum.GetValues(typeof(OrderStatus));
             ViewData["OStatus"] = new SelectList(orderStatus);
-            return RedirectToAction("Create", "OrderDetail");
+            return View(order);
         }
 
         // GET: Order/Edit/5

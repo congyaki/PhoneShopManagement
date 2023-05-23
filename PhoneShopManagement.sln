@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.Data", "PhoneShop.Data\PhoneShop.Data.csproj", "{89367656-B58A-40BC-9E98-9E706B8E4404}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.BusinessLogic", "PhoneShop.BusinessLogic\PhoneShop.BusinessLogic.csproj", "{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.Utilities", "PhoneShop.Utilities\PhoneShop.Utilities.csproj", "{9F70BD2F-C4BE-4119-8343-9633658AA370}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneShop.AdminApp", "PhoneShop.AdminApp\PhoneShop.AdminApp.csproj", "{3A159E91-CE82-47DC-A893-BFE0FE8819A4}"
@@ -21,10 +19,6 @@ Global
 		{89367656-B58A-40BC-9E98-9E706B8E4404}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89367656-B58A-40BC-9E98-9E706B8E4404}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89367656-B58A-40BC-9E98-9E706B8E4404}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DCFCE12-CE2C-4FF4-963C-C1DC29120A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F70BD2F-C4BE-4119-8343-9633658AA370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F70BD2F-C4BE-4119-8343-9633658AA370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F70BD2F-C4BE-4119-8343-9633658AA370}.Release|Any CPU.ActiveCfg = Release|Any CPU

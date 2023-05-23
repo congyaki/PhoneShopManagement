@@ -47,8 +47,10 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // GET: OrderDetail/Create
-        public IActionResult Create()
+        [HttpGet]
+        public IActionResult Create(int newOrderID)
         {
+            int id = newOrderID;
             ViewData["OId"] = new SelectList(_context.Orders, "OId", "OId");
             ViewData["PId"] = new SelectList(_context.Products, "PId", "PBatteryCapacity");
             return View();

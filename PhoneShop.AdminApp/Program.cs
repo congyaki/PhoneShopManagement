@@ -1,10 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using PhoneShop.BusinessLogic.Catalog.Products;
-using PhoneShop.BusinessLogic.Common;
 using PhoneShop.Data.EF;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
