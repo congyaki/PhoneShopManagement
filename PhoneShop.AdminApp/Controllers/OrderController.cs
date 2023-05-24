@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
 using PhoneShop.Data.Enums;
+using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
@@ -21,17 +18,20 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // GET: Order
-        public async Task<IActionResult> Index(string? keyword)
+        public async Task<IActionResult> Index(string? keyword, int? page)
         {
-            var phoneShopDbContext = _context.Orders.Include(p => p.Customer);
+            var pageNumber = page ?? 1;
+            var pageSize = 8;
+            ViewBag.PageSize = pageSize;
+            var phoneShopDbContext = _context.Orders.Include(p => p.Customer).ToList();
 
             if (!string.IsNullOrEmpty(keyword))
             {
                 ViewData["Keyword"] = keyword;
-                phoneShopDbContext = phoneShopDbContext.Where(e => e.OId.ToString().Contains(keyword)).Include(p => p.Customer);
+                phoneShopDbContext = phoneShopDbContext.Where(e => e.OId.ToString().Contains(keyword)).ToList();
             }
 
-            return View(await phoneShopDbContext.ToListAsync());
+            return View(phoneShopDbContext.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Order/Details/5

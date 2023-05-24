@@ -1,5 +1,8 @@
-﻿@model IEnumerable<PhoneShop.Data.Entities.Order>
-
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@*@model IEnumerable<PhoneShop.Data.Entities.Order>
+*@
+@model IPagedList<PhoneShop.Data.Entities.Order>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,16 +39,16 @@
                 <thead>
                     <tr>
                         <td>
-                            @Html.DisplayNameFor(model => model.OId)
+                            Order ID
                         </td>
                         <th>
-                            @Html.DisplayNameFor(model => model.Customer)
+                            Customer Name
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ODate)
+                            Date of Purchase
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.OStatus)
+                            Order Status
                         </th>
 
                         <th></th>
@@ -86,6 +89,10 @@
                     }
                 </tbody>
             </table>
+            <div>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
         </div>
     </div>
 </div>
