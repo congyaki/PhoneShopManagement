@@ -35,14 +35,17 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.OId)
+                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Customer)
+                        </th>
                         <th>
                             @Html.DisplayNameFor(model => model.ODate)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.OStatus)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Customer)
                         </th>
 
                         <th></th>
@@ -53,27 +56,24 @@
                     {
                         <tr>
                             <td>
+                                @Html.DisplayFor(modelItem => item.OId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Customer.CusName)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.ODate)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.OStatus)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Customer.CusName)
-                            </td>
 
                             <td>
-                                <a asp-action="Details" asp-route-id="@item.OId" class="btn btn-info btn-icon-split">
+                                <a asp-action="Index" asp-controller="OrderDetail" asp-route-orderID="@item.OId" class="btn btn-info btn-icon-split" name="orderID">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-info-circle"></i>
                                     </span>
                                     <span class="text">Details</span>
-                                </a>
-                                <a asp-action="Edit" asp-route-id="@item.OId" class="btn btn-warning btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </span>
-                                    <span class="text">Edit</span>
                                 </a>
                                 <a asp-action="Delete" asp-route-id="@item.OId" class="btn btn-danger btn-icon-split">
                                     <span class="icon text-white-50">

@@ -6,7 +6,7 @@ namespace PhoneShop.Data.Entities;
 
 public class Product
 {
-    [DisplayName("ID")]
+    [DisplayName("Product ID")]
     public int PId { get; set; }
 
     [DisplayName("Tên")]

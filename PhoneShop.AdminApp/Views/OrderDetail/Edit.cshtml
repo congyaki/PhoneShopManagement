@@ -11,18 +11,25 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PId" />
-            <input type="hidden" asp-for="OId" />
+            <input type="hidden" asp-for="OId" value="@Model.OId" />
+            <input type="hidden" name="orderID" value="@Model.OId"/>
+            <div class="form-group">
+                <label asp-for="PId" class="control-label">Product ID: @Model.PId</label>
+                <input type="hidden" asp-for="PId" value="@Model.PId" onchange="calculateTotal()" />
+                <input type="hidden" name="productID" value="@Model.PId" />
+                <h3 id="productName"></h3>
+                <h3 id="productPrice"></h3>
+            </div>
             <div class="form-group">
                 <label asp-for="ODQuantity" class="control-label"></label>
-                <input asp-for="ODQuantity" class="form-control" />
+                <input asp-for="ODQuantity" class="form-control" onchange="calculateTotal()" />
                 <span asp-validation-for="ODQuantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ODPrice" class="control-label"></label>
-                <input asp-for="ODPrice" class="form-control" />
+                <h3 id="ODTotalPrice"></h3>
+                <input asp-for="ODPrice" class="form-control" hidden />
                 <span asp-validation-for="ODPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -36,3 +43,24 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script>
+    function calculateTotal() {
+        var productId = document.getElementById("PId").value;
+        var quantity = document.getElementById("ODQuantity").value;
+        $.ajax({
+            type: "GET",
+            url: "/OrderDetail/GetProductPrice",
+            data: { productId: productId, quantity: quantity },
+            success: function (result) {
+                document.getElementById("productName").innerHTML = "Tên sản phẩm: " + result.productName.toLocaleString();
+                document.getElementById("productPrice").innerHTML = "Giá sản phẩm: " + result.productPrice.toLocaleString();
+                document.getElementById("ODTotalPrice").innerHTML = "Tổng: " + result.totalPrice.toLocaleString();
+
+                document.getElementById("ODPrice").value = result.totalPrice;
+            },
+            error: function (xhr, status, error) {
+                //handle error
+            }
+        });
+    }
+</script>

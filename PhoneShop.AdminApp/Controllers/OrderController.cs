@@ -70,7 +70,7 @@ namespace PhoneShop.AdminApp.Controllers
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 int lastOrderId = await _context.Orders.MaxAsync(o => o.OId);
-                return RedirectToAction("Create", "OrderDetail", new { newOrderID = lastOrderId });
+                return RedirectToAction("Create", "OrderDetail", new { orderID = lastOrderId });
             }
             var orderStatus = Enum.GetValues(typeof(OrderStatus));
             ViewData["OStatus"] = new SelectList(orderStatus);

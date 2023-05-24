@@ -7,7 +7,7 @@ namespace PhoneShop.Data.Entities;
 
 public partial class Category
 {
-    [DisplayName("ID")]
+    [DisplayName("CategoryID")]
     public int CId { get; set; }
 
     [DisplayName("Tên")]

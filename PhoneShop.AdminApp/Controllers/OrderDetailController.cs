@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
+using PhoneShop.Utilities.Exceptions;
 
 namespace PhoneShop.AdminApp.Controllers
 {
@@ -20,9 +22,10 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // GET: OrderDetail
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int orderID)
         {
-            var phoneShopDbContext = _context.TbOrderDetails.Include(o => o.Order).Include(o => o.Product);
+            ViewBag.OrderID = orderID;
+            var phoneShopDbContext = _context.TbOrderDetails.Where(e => e.OId == orderID).Include(o => o.Product).Include(o => o.Order);
             return View(await phoneShopDbContext.ToListAsync());
         }
 
@@ -48,11 +51,9 @@ namespace PhoneShop.AdminApp.Controllers
 
         // GET: OrderDetail/Create
         [HttpGet]
-        public IActionResult Create(int newOrderID)
+        public IActionResult Create(int orderID)
         {
-            int id = newOrderID;
-            ViewData["OId"] = new SelectList(_context.Orders, "OId", "OId");
-            ViewData["PId"] = new SelectList(_context.Products, "PId", "PBatteryCapacity");
+            ViewBag.OrderID = orderID;
             return View();
         }
 
@@ -61,34 +62,51 @@ namespace PhoneShop.AdminApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PId,OId,ODQuantity,ODPrice")] OrderDetail orderDetail)
+        public async Task<IActionResult> Create(int newOrderID, [Bind("PId,OId,ODQuantity,ODPrice")] OrderDetail orderDetail)
         {
             if (ModelState.IsValid)
             {
+                if (_context.TbOrderDetails.Where(e => e.OId == orderDetail.OId).FirstOrDefault(e => e.PId == orderDetail.PId) != null)
+                {
+                    throw new PhoneShopException("Product đã có trong Order");
+                }
                 _context.Add(orderDetail);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", new {orderID = orderDetail.OId});
             }
-            ViewData["OId"] = new SelectList(_context.Orders, "OId", "OId", orderDetail.OId);
-            ViewData["PId"] = new SelectList(_context.Products, "PId", "PBatteryCapacity", orderDetail.PId);
-            return View(orderDetail);
+            return View("Create", new { orderID = orderDetail.OId });
+        }
+
+        [HttpGet]
+        public JsonResult GetProductPrice(int productId, int quantity)
+        {
+            var product = _context.Products.Find(productId);
+
+            if (product != null)
+            {
+                var totalPrice = product.PPrice * quantity;
+                var result = new { productName = product.PName, productPrice = product.PPrice, totalPrice = totalPrice };
+                return Json(result);
+            }
+
+            return Json(null);
         }
 
         // GET: OrderDetail/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int orderID, int productID)
         {
-            if (id == null || _context.TbOrderDetails == null)
+            if (orderID == null || productID == null || _context.TbOrderDetails == null)
             {
                 return NotFound();
             }
 
-            var orderDetail = await _context.TbOrderDetails.FindAsync(id);
+            var orderDetail = await _context.TbOrderDetails
+                .FirstOrDefaultAsync(m => m.PId == productID && m.OId == orderID);
             if (orderDetail == null)
             {
                 return NotFound();
             }
-            ViewData["OId"] = new SelectList(_context.Orders, "OId", "OId", orderDetail.OId);
-            ViewData["PId"] = new SelectList(_context.Products, "PId", "PBatteryCapacity", orderDetail.PId);
+
             return View(orderDetail);
         }
 
@@ -97,9 +115,9 @@ namespace PhoneShop.AdminApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PId,OId,ODQuantity,ODPrice")] OrderDetail orderDetail)
+        public async Task<IActionResult> Edit(int orderID, int productID, [Bind("PId,OId,ODQuantity,ODPrice")] OrderDetail orderDetail)
         {
-            if (id != orderDetail.PId)
+            if (productID != orderDetail.PId || orderID != orderDetail.OId)
             {
                 return NotFound();
             }
@@ -108,6 +126,10 @@ namespace PhoneShop.AdminApp.Controllers
             {
                 try
                 {
+                    if (_context.TbOrderDetails.Where(e => e.OId == orderID && e.PId == productID) == null)
+                {
+                    throw new PhoneShopException("Không tìm thấy sản phẩm trong order");
+                }
                     _context.Update(orderDetail);
                     await _context.SaveChangesAsync();
                 }
@@ -122,25 +144,21 @@ namespace PhoneShop.AdminApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { orderID = orderID });
             }
-            ViewData["OId"] = new SelectList(_context.Orders, "OId", "OId", orderDetail.OId);
-            ViewData["PId"] = new SelectList(_context.Products, "PId", "PBatteryCapacity", orderDetail.PId);
             return View(orderDetail);
         }
 
         // GET: OrderDetail/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int orderID, int productID)
         {
-            if (id == null || _context.TbOrderDetails == null)
+            if (orderID == null || productID == null || _context.TbOrderDetails == null)
             {
                 return NotFound();
             }
 
             var orderDetail = await _context.TbOrderDetails
-                .Include(o => o.Order)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.PId == id);
+                .FirstOrDefaultAsync(m => m.PId == productID && m.OId == orderID);
             if (orderDetail == null)
             {
                 return NotFound();
@@ -152,20 +170,20 @@ namespace PhoneShop.AdminApp.Controllers
         // POST: OrderDetail/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int orderID, int productID)
         {
             if (_context.TbOrderDetails == null)
             {
                 return Problem("Entity set 'PhoneShopDbContext.TbOrderDetails'  is null.");
             }
-            var orderDetail = await _context.TbOrderDetails.FindAsync(id);
+            var orderDetail = await _context.TbOrderDetails.FirstOrDefaultAsync(m => m.PId == productID && m.OId == orderID);
             if (orderDetail != null)
             {
                 _context.TbOrderDetails.Remove(orderDetail);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new {orderID = orderID});
         }
 
         private bool OrderDetailExists(int id)

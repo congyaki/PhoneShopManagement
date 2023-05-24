@@ -5,50 +5,100 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Danh sách Order ID: @ViewBag.OrderID</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ODQuantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ODPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ODQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ODPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order.OId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.PBatteryCapacity)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<!-- DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <a class="btn btn-success" asp-action="Create" asp-route-orderID="@ViewBag.OrderID">Create New</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Order.OId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product.PId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product.PName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ODQuantity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ODPrice)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.OId)
+                            </td>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.Product.PId)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.PName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ODQuantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ODPrice)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-orderID="@item.OId" asp-route-productID="@item.PId" class="btn btn-warning btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </span>
+                                    <span class="text">Edit</span>
+                                </a>
+                                <a asp-action="Delete" asp-route-orderID="@item.OId" asp-route-productID="@item.PId" class="btn btn-danger btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                    <span class="text">Delete</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h3 id="totalOrder"></h3>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculateTotal() {
+        var quantity = document.getElementById("ODQuantity").value;
+        $.ajax({
+            type: "GET",
+            url: "/OrderDetail/GetProductPrice",
+            data: { productId: productId, quantity: quantity },
+            success: function (result) {
+                document.getElementById("productName").innerHTML = "Tên sản phẩm: " + result.productName.toLocaleString();
+                document.getElementById("productPrice").innerHTML = "Giá sản phẩm: " + result.productPrice.toLocaleString();
+                document.getElementById("ODTotalPrice").innerHTML = "Tổng: " + result.totalPrice.toLocaleString();
+
+                document.getElementById("ODPrice").value = result.totalPrice;
+            },
+            error: function (xhr, status, error) {
+                //handle error
+            }
+        });
+    }
+</script>

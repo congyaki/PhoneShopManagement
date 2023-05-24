@@ -7,14 +7,16 @@ namespace PhoneShop.Data.Entities;
 
 public partial class Order
 {
+    [DisplayName("Order ID")]
     public int OId { get; set; }
 
-    public int CusId { get; set; }
 
-    [DisplayName("Ngày mua")]
+    [DisplayName("Customer ID")]
+    public int CusId { get; set; }
+    [DisplayName("Date of Purchase")]
     public DateTime ODate { get; set; }
 
-    [DisplayName("Tình trạng")]
+    [DisplayName("Status")]
     public OrderStatus OStatus { get; set; }
 
     public List<OrderDetail>? OrderDetails { get; set; }
