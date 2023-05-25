@@ -23,4 +23,8 @@
     <ProjectReference Include="..\PhoneShop.Utilities\PhoneShop.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\ProductImage\" />
+  </ItemGroup>
+
 </Project>

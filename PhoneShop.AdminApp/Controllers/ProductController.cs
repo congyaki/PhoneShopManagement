@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PhoneShop.AdminApp.ViewModel;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
 
@@ -69,18 +70,69 @@ namespace PhoneShop.AdminApp.Controllers
         // POST: Product/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PId,PName,MId,PDescription,PColor,PStorage,PRam,PScreenSize,PResolution,POperatingSystem,PCamera,PBatteryCapacity,PConnectivity,PWeight,PDimension,PPrice,POriginalPrice,PStock")] Product product)
+        public async Task<IActionResult> Create(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                var product = new Product
+                {
+                    PName = model.PName,
+                    MId = model.MId,
+                    PDescription = model.PDescription,
+                    PColor = model.PColor,
+                    PStorage = model.PStorage,
+                    PRam = model.PRam,
+                    PScreenSize = model.PScreenSize,
+                    PResolution = model.PResolution,
+                    POperatingSystem = model.POperatingSystem,
+                    PCamera = model.PCamera,
+                    PBatteryCapacity = model.PBatteryCapacity,
+                    PConnectivity = model.PConnectivity,
+                    PWeight = model.PWeight,
+                    PDimension = model.PDimension,
+                    PPrice = model.PPrice,
+                    POriginalPrice = model.POriginalPrice,
+                    PStock = model.PStock
+                };
+
+                _context.Products.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // tải lên các file ảnh khác
+                if (model.ImageFiles != null && model.ImageFiles.Count > 0)
+                {
+                    foreach (var file in model.ImageFiles)
+                    {
+                        var extension = Path.GetExtension(file.FileName);
+                        var uniqueFileName = product.PId.ToString() + "-" + Guid.NewGuid().ToString() + extension;
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/ProductImage", uniqueFileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        var image = new ProductImage
+                        {
+                            PIPath = $"/images/{uniqueFileName}",
+                            PICaption = "",
+                            PIIsDefault = false,
+                            PISortOrder = 0
+                        };
+
+                        product.ProductImages.Add(image);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
+                ViewData["MId"] = new SelectList(_context.Manufacturers, "MId", "MAddress", model.MId);
+                return RedirectToAction("Index");
             }
-            ViewData["MId"] = new SelectList(_context.Manufacturers, "MId", "MAddress", product.MId);
-            return View(product);
+
+            return View(model);
         }
 
         // GET: Product/Edit/5

@@ -15,6 +15,6 @@ namespace PhoneShop.Data.Entities
         public bool PIIsDefault { get; set; }
         public int PISortOrder { get; set; }
 
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     }
 }
