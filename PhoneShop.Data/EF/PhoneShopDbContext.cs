@@ -30,7 +30,6 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Gu
     public virtual DbSet<OrderDetail> TbOrderDetails { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
-    public virtual DbSet<ProductImage> ProductImages { get; set; }
 
     public virtual DbSet<ProductInCategory> ProductInCategories { get; set; }
 
@@ -168,28 +167,12 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Gu
             entity.Property(e => e.PPrice).HasColumnName("P_Price").IsRequired().HasColumnType("decimal(18,2)");
             entity.Property(e => e.POriginalPrice).HasColumnName("P_OriginalPrice").IsRequired().HasColumnType("decimal(18,2)");
             entity.Property(e => e.PStock).HasColumnName("P_Stock").IsRequired().HasDefaultValue(0);
+            entity.Property(e => e.PAvatar).HasColumnName("P_Avatar");
             entity.Property(e => e.MId).HasColumnName("M_Id");
 
             entity.HasOne(e => e.Manufacturer).WithMany(e => e.Products).HasForeignKey(e => e.MId);
-
-
         });
 
-        modelBuilder.Entity<ProductImage>(entity =>
-        {
-            entity.ToTable("ProductImages");
-            entity.HasKey(x => x.PIId);
-
-            entity.Property(x => x.PIId).UseIdentityColumn().HasColumnName("PI_Id");
-            entity.Property(x => x.PId).HasColumnName("P_Id");
-            entity.Property(x => x.PIPath).HasMaxLength(200).IsRequired(true).HasColumnName("PI_Path");
-            entity.Property(x => x.PICaption).HasMaxLength(200).HasColumnName("PI_Caption");
-            entity.Property(x => x.PIIsDefault).HasColumnName("PI_IsDefault");
-            entity.Property(x => x.PISortOrder).HasColumnName("PI_SortOrder");
-
-
-            entity.HasOne(x => x.Product).WithMany(x => x.ProductImages).HasForeignKey(x => x.PId);
-        });
 
         modelBuilder.Entity<ProductInCategory>(entity =>
         {

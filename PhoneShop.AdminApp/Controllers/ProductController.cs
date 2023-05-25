@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using PhoneShop.AdminApp.ViewModel;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
 
@@ -73,66 +68,48 @@ namespace PhoneShop.AdminApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProductViewModel model)
+        public async Task<IActionResult> Create([Bind("PId,PName,MId,PDescription,PColor,PStorage,PRam,PScreenSize,PResolution,POperatingSystem,PCamera,PBatteryCapacity,PConnectivity,PWeight,PDimension,PPrice,POriginalPrice,PStock,PAvatar")] 
+                                                Product product, IFormFile avatar)
         {
             if (ModelState.IsValid)
             {
-                var product = new Product
+                // tải lên các file ảnh khác
+                if (avatar != null && avatar.Length > 0)
                 {
-                    PName = model.PName,
-                    MId = model.MId,
-                    PDescription = model.PDescription,
-                    PColor = model.PColor,
-                    PStorage = model.PStorage,
-                    PRam = model.PRam,
-                    PScreenSize = model.PScreenSize,
-                    PResolution = model.PResolution,
-                    POperatingSystem = model.POperatingSystem,
-                    PCamera = model.PCamera,
-                    PBatteryCapacity = model.PBatteryCapacity,
-                    PConnectivity = model.PConnectivity,
-                    PWeight = model.PWeight,
-                    PDimension = model.PDimension,
-                    PPrice = model.PPrice,
-                    POriginalPrice = model.POriginalPrice,
-                    PStock = model.PStock
-                };
+
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    var extension = Path.GetExtension(avatar.FileName).ToLower();
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        ModelState.AddModelError("avatar", "Chỉ cho phép tải lên các tệp hình ảnh định dạng JPG, JPEG, PNG hoặc GIF.");
+                        return View(product);
+                    }
+                    // Get the filename and extension
+                    var fileName = Path.GetFileNameWithoutExtension(avatar.FileName);
+
+                    // Create a unique filename
+                    var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+                    // Create a path for the image file
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "ProductImage", uniqueFileName);
+
+                    // Save the image file to the server
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await avatar.CopyToAsync(stream);
+                    }
+
+                    // Set the product avatar property to the filename
+                    product.PAvatar = uniqueFileName;
+                }
+
 
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
-
-                // tải lên các file ảnh khác
-                if (model.ImageFiles != null && model.ImageFiles.Count > 0)
-                {
-                    foreach (var file in model.ImageFiles)
-                    {
-                        var extension = Path.GetExtension(file.FileName);
-                        var uniqueFileName = product.PId.ToString() + "-" + Guid.NewGuid().ToString() + extension;
-                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/ProductImage", uniqueFileName);
-
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
-
-                        var image = new ProductImage
-                        {
-                            PIPath = $"/images/{uniqueFileName}",
-                            PICaption = "",
-                            PIIsDefault = false,
-                            PISortOrder = 0
-                        };
-
-                        product.ProductImages.Add(image);
-                        await _context.SaveChangesAsync();
-                    }
-                }
-
-                ViewData["MId"] = new SelectList(_context.Manufacturers, "MId", "MAddress", model.MId);
                 return RedirectToAction("Index");
             }
-
-            return View(model);
+            ViewData["MId"] = new SelectList(_context.Manufacturers, "MId", "MAddress", product.MId);
+            return View(product);
         }
 
         // GET: Product/Edit/5

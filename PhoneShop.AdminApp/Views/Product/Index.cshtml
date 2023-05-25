@@ -47,6 +47,9 @@ else
                         <th>
                             @Html.DisplayNameFor(model => model.PName)
                         </th>
+                        <th width="200px" height="100px">
+                            @Html.DisplayNameFor(model => model.PAvatar)
+                        </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Manufacturer)
                         </th>
@@ -68,6 +71,9 @@ else
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PName)
+                            </td>
+                            <td>
+                                <img src="~/img/ProductImage/@item.PAvatar" alt="Ảnh đại diện sản phẩm" width="20%" height="20%">
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Manufacturer.MName)
