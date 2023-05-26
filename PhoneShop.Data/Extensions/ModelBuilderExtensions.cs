@@ -20,14 +20,34 @@ namespace PhoneShop.Data.Extensions
                 new Manufacturer { MId = 2, MName = "Apple", MAddress = "1 Apple Park Way, Cupertino, CA 95014, USA", MEmail = "info@apple.com", MPhone = "+1 (408) 996-1010" },
                 new Manufacturer { MId = 3, MName = "OnePlus", MAddress = "Bantian, Longgang District, Shenzhen, China", MEmail = "support@oneplus.com", MPhone = "+86-755-28780808" },
                 new Manufacturer { MId = 4, MName = "Xiaomi", MAddress = "Building 3, Wangjing Park, Chaoyang District, Beijing, China", MEmail = "service.global@xiaomi.com", MPhone = "+86-400-100-5678" },
-                new Manufacturer { MId = 5, MName = "OPPO", MAddress = "1600 Amphitheatre Parkway, Mountain View, California 94043, United States of America", MEmail = "support@google.com", MPhone = "+1 650-253-0000" }
+                new Manufacturer { MId = 5, MName = "OPPO", MAddress = "1600 Amphitheatre Parkway, Mountain View, California 94043, United States of America", MEmail = "support@google.com", MPhone = "+1 650-253-0000" },
+                new Manufacturer { MId = 6, MName = "Huawei", MAddress = "Bantian, Longgang District, Shenzhen, China", MEmail = "support@huawei.com", MPhone = "+86-755-28780808" },
+                new Manufacturer { MId = 7, MName = "Sony", MAddress = "1-7-1 Konan, Minato-ku, Tokyo 108-0075, Japan", MEmail = "support@sony.com", MPhone = "+81-3-6748-2111" },
+                new Manufacturer { MId = 8, MName = "LG", MAddress = "128 Yeoui-daero, Yeongdeungpo-gu, Seoul, 07336, South Korea", MEmail = "support@lg.com", MPhone = "+82-2-3777-1114" },
+                new Manufacturer { MId = 9, MName = "Nokia", MAddress = "Karaportti 3, 02610 Espoo, Finland", MEmail = "support@nokia.com", MPhone = "+358 (0) 10 44 88 000" },
+                new Manufacturer { MId = 10, MName = "Motorola", MAddress = "222 W Merchandise Mart Plaza #1800, Chicago, IL 60654, USA", MEmail = "support@motorola.com", MPhone = "+1 (800) 668-6765" },
+                new Manufacturer { MId = 11, MName = "Asus", MAddress = "No. 15 Li-De Rd., Beitou District, Taipei 112, Taiwan", MEmail = "support@asus.com", MPhone = "+886-2-2894-3447" },
+                new Manufacturer { MId = 12, MName = "Lenovo", MAddress = "Morrisville, NC 27560, United States", MEmail = "support@lenovo.com", MPhone = "+1-800-426-7378" },
+                new Manufacturer { MId = 13, MName = "Google", MAddress = "1600 Amphitheatre Parkway, Mountain View, California 94043, United States of America", MEmail = "support@google.com", MPhone = "+1 650-253-0000" },
+                new Manufacturer { MId = 14, MName = "Vivo", MAddress = "No. 1 Building, Shangdi Xinxi Road, Haidian District, Beijing, China", MEmail = "support@vivo.com", MPhone = "+86-755-28780808" }
             );
             modelBuilder.Entity<Category>().HasData(
                 new Category { CId = 1, CName = "Flagship", CSortOrder = 1, CParentId = null},
                 new Category { CId = 2, CName = "Mid-range", CSortOrder = 2, CParentId = null},
                 new Category { CId = 3, CName = "Apple iPhone Pro series", CSortOrder = 1, CParentId = 1},
                 new Category { CId = 4, CName = "Samsung Galaxy S series", CSortOrder = 2, CParentId = 1 },
-                new Category { CId = 5, CName = "Samsung Galaxy A series", CSortOrder = 3, CParentId = 2 }
+                new Category { CId = 5, CName = "Samsung Galaxy A series", CSortOrder = 3, CParentId = 2 },
+                new Category { CId = 6, CName = "OnePlus 9 series", CSortOrder = 1, CParentId = 1 },
+                new Category { CId = 7, CName = "Xiaomi Mi series", CSortOrder = 2, CParentId = 1 },
+                new Category { CId = 8, CName = "OPPO Reno series", CSortOrder = 3, CParentId = 1 },
+                new Category { CId = 9, CName = "Huawei P series", CSortOrder = 4, CParentId = 1 },
+                new Category { CId = 10, CName = "LG G series", CSortOrder = 5, CParentId = 1 },
+                new Category { CId = 11, CName = "Samsung Galaxy Note series", CSortOrder = 1, CParentId = 4 },
+                new Category { CId = 12, CName = "Samsung Galaxy Fold series", CSortOrder = 2, CParentId = 4 },
+                new Category { CId = 13, CName = "Samsung Galaxy Z series", CSortOrder = 3, CParentId = 4 },
+                new Category { CId = 14, CName = "Xiaomi Redmi series", CSortOrder = 1, CParentId = 2 },
+                new Category { CId = 15, CName = "Realme series", CSortOrder = 2, CParentId = 2 },
+                new Category { CId = 16, CName = "Nokia X series", CSortOrder = 3, CParentId = 2 }
                 );
 
             /*modelBuilder.Entity<Product>().HasData(

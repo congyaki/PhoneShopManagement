@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
+using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
@@ -16,24 +18,29 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // GET: Product
-        public async Task<IActionResult> Index(int? categoryID, string? keyword)
+        public async Task<IActionResult> Index(int? categoryID, string? keyword, int? page)
         {
-            var phoneShopDbContext = _context.Products.Include(p => p.Manufacturer);
+            var pageNumber = page ?? 1;
+            var pageSize = 8;
+            ViewBag.PageSize = pageSize;
+
+            var phoneShopDbContext = _context.Products.Include(p => p.Manufacturer).ToList();
 
             if (!string.IsNullOrEmpty(keyword))
             {
                 ViewData["Keyword"] = keyword;
-                phoneShopDbContext = phoneShopDbContext.Where(e => e.PName.Contains(keyword)).Include(p => p.Manufacturer);
+                phoneShopDbContext = phoneShopDbContext.Where(e => e.PName.Contains(keyword)).ToList();
             }
             if (categoryID != null && categoryID != 0)
             {
                 ViewData["CategoryID"] = categoryID.ToString();
                 var cName = _context.Categories.FirstOrDefault(e => e.CId == categoryID).CName;
                 ViewData["CategoryName"] = cName.ToString();
-                phoneShopDbContext = phoneShopDbContext.Where(p => p.ProductInCategories.Any(pic => pic.CId == categoryID)).Include(p => p.Manufacturer);
+                phoneShopDbContext = phoneShopDbContext.Where(p => p.ProductInCategories.Any(pic => pic.CId == categoryID)).ToList();
             }
 
-            return View(await phoneShopDbContext.ToListAsync());
+            return View(phoneShopDbContext.ToPagedList(pageNumber, pageSize));
+
         }
 
         // GET: Product/Details/5

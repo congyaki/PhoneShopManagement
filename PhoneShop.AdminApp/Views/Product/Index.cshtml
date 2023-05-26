@@ -1,4 +1,8 @@
-﻿@model IEnumerable<PhoneShop.Data.Entities.Product>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model IPagedList<PhoneShop.Data.Entities.Product>
+
 
 @{
     ViewData["Title"] = "Sản Phẩm";
@@ -45,22 +49,22 @@ else
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.PName)
-                        </th>
-                        <th width="200px" height="100px">
-                            @Html.DisplayNameFor(model => model.PAvatar)
+                            Product Name
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Manufacturer)
+                            Avatar
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PPrice)
+                            Manufacturer
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.POriginalPrice)
+                            Price
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PStock)
+                            Origina lPrice
+                        </th>
+                        <th>
+                            Stock
                         </th>
                         <th></th>
                     </tr>
@@ -73,7 +77,9 @@ else
                                 @Html.DisplayFor(modelItem => item.PName)
                             </td>
                             <td>
-                                <img src="~/img/ProductImage/@item.PAvatar" alt="Ảnh đại diện sản phẩm" width="20%" height="20%">
+                                <div class="text-center">
+                                    <img src="~/img/ProductImage/@item.PAvatar" alt="Ảnh đại diện sản phẩm" style="max-height: 150px; max-width: 150px;">
+                                </div>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Manufacturer.MName)
@@ -111,6 +117,18 @@ else
                     }
                 </tbody>
             </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="d-flex mx-auto">
+                <ul class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { LiElementClasses = new[] { "page-item" }, PageClasses = new[] { "page-link" }, UlElementClasses = new[] { "pagination" } })
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="text-muted d-flex mx-auto">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </div>
         </div>
     </div>
 </div>
