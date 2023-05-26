@@ -18,28 +18,29 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // GET: Product
-        public async Task<IActionResult> Index(int? categoryID, string? keyword, int? page)
+        public async Task<IActionResult> Index(int? categoryID = null, string? keyword = null, int? page = null)
         {
             var pageNumber = page ?? 1;
             var pageSize = 8;
             ViewBag.PageSize = pageSize;
 
-            var phoneShopDbContext = _context.Products.Include(p => p.Manufacturer).ToList();
+            var phoneShopDbContext = _context.Products.Include(p => p.Manufacturer).AsQueryable();
 
             if (!string.IsNullOrEmpty(keyword))
             {
                 ViewData["Keyword"] = keyword;
-                phoneShopDbContext = phoneShopDbContext.Where(e => e.PName.Contains(keyword)).ToList();
+                phoneShopDbContext = phoneShopDbContext.Where(e => e.PName.Contains(keyword));
             }
+
             if (categoryID != null && categoryID != 0)
             {
                 ViewData["CategoryID"] = categoryID.ToString();
                 var cName = _context.Categories.FirstOrDefault(e => e.CId == categoryID).CName;
                 ViewData["CategoryName"] = cName.ToString();
-                phoneShopDbContext = phoneShopDbContext.Where(p => p.ProductInCategories.Any(pic => pic.CId == categoryID)).ToList();
+                phoneShopDbContext = phoneShopDbContext.Where(p => p.ProductInCategories.Any(pic => pic.CId == categoryID));
             }
 
-            return View(phoneShopDbContext.ToPagedList(pageNumber, pageSize));
+            return View(await phoneShopDbContext.ToPagedListAsync(pageNumber, pageSize));
 
         }
 
