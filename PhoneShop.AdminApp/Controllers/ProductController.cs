@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,8 @@ using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
+    [Authorize]
+
     public class ProductController : Controller
     {
         private readonly PhoneShopDbContext _context;

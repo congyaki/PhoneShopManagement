@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneShop.Data.EF;
 
@@ -11,9 +12,10 @@ using PhoneShop.Data.EF;
 namespace PhoneShop.Data.Migrations
 {
     [DbContext(typeof(PhoneShopDbContext))]
-    partial class PhoneShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230530182446_Remove_User_PhoneShopDbContext")]
+    partial class Remove_User_PhoneShopDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -3,6 +3,7 @@ using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using PhoneShop.AdminApp.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<PhoneShopDbContext>(options => options.UseSqlServe
 
 
 builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<AuthDbContext>();
 
 
@@ -29,7 +30,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 /*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option =>
     {
-        option.LoginPath = new PathString("/Account/Login.cshtml");
+        option.LoginPath = new PathString("/Identity/Account/Login");
         option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
     });*/
 
@@ -47,9 +48,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.UseAuthentication();;
-
-
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
