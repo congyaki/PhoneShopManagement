@@ -9,7 +9,7 @@ using PhoneShop.Data.Extensions;
 
 namespace PhoneShop.Data.EF;
 
-public partial class PhoneShopDbContext : IdentityDbContext<AppUser>
+public partial class PhoneShopDbContext : DbContext
 {
     public PhoneShopDbContext()
     {
@@ -183,7 +183,7 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser>
 
         });
 
-        modelBuilder.Entity<AppUser>(entity =>
+        /*modelBuilder.Entity<AppUser>(entity =>
         {
             entity.ToTable("tbAppUser");
             entity.Property(e => e.FirstName).IsRequired().HasMaxLength(200);
@@ -204,7 +204,7 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser>
         modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("tbAppUserLogin").HasKey(e => e.UserId);
 
         modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("tbAppRoleClaim");
-        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("tbAppUserToken").HasKey(e => e.UserId);
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("tbAppUserToken").HasKey(e => e.UserId);*/
 
 
 

@@ -1,33 +1,37 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using PhoneShop.AdminApp.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("PhoneShopDB");
 builder.Services.AddDbContext<PhoneShopDbContext>(options => options.UseSqlServer(connectionString));
 
+
+builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AuthDbContext>();
+
+
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+builder.Services.AddRazorPages();
+
+builder.Services.Configure<IdentityOptions>(options =>
 {
-    // Cấu hình các tùy chọn cho Identity
-})
-.AddEntityFrameworkStores<PhoneShopDbContext>()
-.AddDefaultTokenProviders();
+    options.Password.RequireUppercase = false;
+});
 //Login
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+/*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option =>
     {
-        option.LoginPath = new PathString("/Account/Login");
+        option.LoginPath = new PathString("/Account/Login.cshtml");
         option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-    });
+    });*/
 
 var app = builder.Build();
 
@@ -43,6 +47,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 
 app.UseAuthorization();
@@ -54,4 +59,5 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 });
+app.MapRazorPages();
 app.Run();
