@@ -190,6 +190,7 @@ public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Gu
             entity.Property(e => e.LastName).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Dob).IsRequired();
 
+
         });
 
         modelBuilder.Entity<AppRole>(entity =>

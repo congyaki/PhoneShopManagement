@@ -46,11 +46,27 @@ namespace PhoneShop.AdminApp.Controllers
             return View(productInCategory);
         }
 
+        [HttpGet]
+        public JsonResult GetDisplay(int productId, int categoryId)
+        {
+            var product = _context.Products.Find(productId);
+            var category = _context.Categories.Find(categoryId);
+
+
+            if (product != null && category != null)
+            {
+                var result = new { productName = product.PName, categoryName = category.CName };
+                return Json(result);
+            }
+
+            return Json(null);
+        }
+
         // GET: ProductInCategory/Create
         public IActionResult Create()
         {
             ViewData["CId"] = new SelectList(_context.Categories, "CId", "CName");
-            ViewData["PId"] = new SelectList(_context.Products, "PId", "PBatteryCapacity");
+            ViewData["PId"] = new SelectList(_context.Products, "PId", "PName");
             return View();
         }
 

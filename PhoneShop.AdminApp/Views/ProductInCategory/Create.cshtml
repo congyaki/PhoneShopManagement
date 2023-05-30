@@ -15,11 +15,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="PId" class="control-label"></label>
-                <select asp-for="PId" class ="form-control" asp-items="ViewBag.PId"></select>
+                <input asp-for="PId" class="form-control" onchange="display()" />
+                <h3 id="productName"></h3>
             </div>
             <div class="form-group">
                 <label asp-for="CId" class="control-label"></label>
-                <select asp-for="CId" class ="form-control" asp-items="ViewBag.CId"></select>
+                <input asp-for="CId" class="form-control" onchange="display()" />
+                <h3 id="categoryName"></h3>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -32,3 +34,21 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script>
+    function display() {
+        var productId = document.getElementById("PId").value;
+        var categoryId = document.getElementById("CId").value;
+        $.ajax({
+            type: "GET",
+            url: "/ProductInCategory/GetDisplay",
+            data: { productId: productId, categoryId: categoryId },
+            success: function (result) {
+                document.getElementById("productName").innerHTML = "Tên sản phẩm: " + result.productName.toLocaleString();
+                document.getElementById("categoryName").innerHTML = "Tên danh mục: " + result.categoryName.toLocaleString();
+            },
+            error: function (xhr, status, error) {
+                //handle error
+            }
+        });
+    }
+</script>

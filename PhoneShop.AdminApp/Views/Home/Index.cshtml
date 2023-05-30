@@ -1,8 +1,74 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<style>
+    .main {
+        background-image: url("D:\WorkSpace\c_sharp\PhoneShopManagement\PhoneShop.AdminApp\wwwroot\img\HinhNen.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 font-weight-bold text-dark">Welcome to</h1>
+    <h1 class="display-7 font-weight-bold text-dark">CellPhoneX Shop Administration Website</h1>
 </div>
+<main class="container py-5 main">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Sản phẩm</h2>
+                    <p class="card-text">Quản lý sản phẩm của cửa hàng.</p>
+                    <a asp-action="Index" asp-controller="Product" class="btn btn-primary">Xem sản phẩm</a>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Đơn hàng</h2>
+                    <p class="card-text">Quản lý đơn hàng của cửa hàng.</p>
+                    <a asp-action="Index" asp-controller="Order" class="btn btn-primary">Xem đơn hàng</a>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Khách hàng</h2>
+                    <p class="card-text">Quản lý khách hàng của cửa hàng.</p>
+                    <a asp-action="Index" asp-controller="Customer" class="btn btn-primary">Xem khách hàng</a>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Nhà cung cấp</h2>
+                    <p class="card-text">Quản lý nhà cung cấp của cửa hàng.</p>
+                    <a asp-action="Index" asp-controller="Manufacturer" class="btn btn-primary">Xem nhà cung cấp</a>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Danh mục sản phẩm</h2>
+                    <p class="card-text">Quản lý danh mục sản phẩm của cửa hàng.</p>
+                    <a asp-action="Index" asp-controller="Category" class="btn btn-primary">Xem danh mục sản phẩm</a>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Người dùng</h2>
+                    <p class="card-text">Quản lý người dùng của cửa hàng.</p>
+                    <a asp-action="Index" asp-controller="Category" class="btn btn-primary">Xem người dùng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

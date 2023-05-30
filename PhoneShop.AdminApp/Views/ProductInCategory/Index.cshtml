@@ -26,10 +26,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.PBatteryCapacity)
+                @Html.DisplayFor(modelItem => item.Product.PId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.CName)
+                @Html.DisplayFor(modelItem => item.Category.CId)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

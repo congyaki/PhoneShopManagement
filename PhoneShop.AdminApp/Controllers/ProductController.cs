@@ -24,7 +24,7 @@ namespace PhoneShop.AdminApp.Controllers
             var pageSize = 8;
             ViewBag.PageSize = pageSize;
 
-            var phoneShopDbContext = _context.Products.Include(p => p.Manufacturer).AsQueryable();
+            var phoneShopDbContext = _context.Products.Include(p => p.Manufacturer).Include(p => p.ProductInCategories).AsQueryable();
 
             if (!string.IsNullOrEmpty(keyword))
             {
@@ -37,7 +37,7 @@ namespace PhoneShop.AdminApp.Controllers
                 ViewData["CategoryID"] = categoryID.ToString();
                 var cName = _context.Categories.FirstOrDefault(e => e.CId == categoryID).CName;
                 ViewData["CategoryName"] = cName.ToString();
-                phoneShopDbContext = phoneShopDbContext.Where(p => p.ProductInCategories.Any(pic => pic.CId == categoryID));
+                phoneShopDbContext = phoneShopDbContext.Where(p => p.ProductInCategories.Any(pic => pic.CId == categoryID)).Include(p => p.Manufacturer).AsQueryable();
             }
 
             return View(await phoneShopDbContext.ToPagedListAsync(pageNumber, pageSize));

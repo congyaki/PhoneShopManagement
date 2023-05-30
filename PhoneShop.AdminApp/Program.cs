@@ -15,7 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option =>
     {
-        option.LoginPath = "/Account/Login";
+        option.LoginPath = new PathString("/Account/Login");
         option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
     });
 
@@ -43,7 +43,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Order}/{action=Create}/{id?}"
+        pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 });
 app.Run();
