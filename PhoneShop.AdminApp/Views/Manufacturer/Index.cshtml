@@ -35,16 +35,16 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.MName)
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.MAddress)
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.MEmail)
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.MPhone)
                         </th>
                         <th></th>
@@ -54,19 +54,19 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.MName)
                             </td>
-                            <td>
+                            <td class="align-middle text-center">
                                 @Html.DisplayFor(modelItem => item.MAddress)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.MEmail)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.MPhone)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 <a asp-action="Details" asp-route-id="@item.MId" class="btn btn-info btn-icon-split btn-block">
                                     
                                     <span class="text">Details</span>

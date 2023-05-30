@@ -26,6 +26,7 @@ namespace PhoneShop.AdminApp.Controllers
         {
             ViewBag.OrderID = orderID;
             var phoneShopDbContext = _context.TbOrderDetails.Where(e => e.OId == orderID).Include(o => o.Product).Include(o => o.Order);
+            ViewData["totalOrder"] = phoneShopDbContext.Select(p => p.ODPrice).Sum();
             return View(await phoneShopDbContext.ToListAsync());
         }
 

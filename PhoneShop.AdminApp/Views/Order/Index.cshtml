@@ -41,16 +41,16 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <td>
+                        <th class="text-center align-middle">
                             Order ID
-                        </td>
-                        <th>
+                        </th>
+                        <th class="text-center align-middle">
                             Customer Name
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             Date of Purchase
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             Order Status
                         </th>
 
@@ -61,20 +61,20 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.OId)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.Customer.CusName)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.ODate)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.OStatus)
                             </td>
 
-                            <td>
+                            <td class="text-center align-middle">
                                 <a asp-action="Index" asp-controller="OrderDetail" asp-route-orderID="@item.OId" class="btn btn-info btn-icon-split btn-block" name="orderID">
                                     
                                     <span class="text">Details</span>

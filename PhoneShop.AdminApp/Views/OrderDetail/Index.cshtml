@@ -22,20 +22,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.Order.OId)
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.Product.PId)
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.Product.PName)
                         </th>
-                        <th>
+                        <th class="text-center align-middle">
                             @Html.DisplayNameFor(model => model.ODQuantity)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ODPrice)
+                        <th class="text-center align-middle">
+                            Thành Tiền
                         </th>
                         <th></th>
                     </tr>
@@ -44,32 +44,26 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.Order.OId)
                             </td>
-                            <th>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.Product.PId)
-                            </th>
-                            <td>
+                            </td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.Product.PName)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.ODQuantity)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.ODPrice)
                             </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-orderID="@item.OId" asp-route-productID="@item.PId" class="btn btn-warning btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </span>
+                            <td class="text-center align-middle">
+                                <a asp-action="Edit" asp-route-orderID="@item.OId" asp-route-productID="@item.PId" class="btn btn-warning btn-icon-split btn-block">
                                     <span class="text">Edit</span>
                                 </a>
-                                <a asp-action="Delete" asp-route-orderID="@item.OId" asp-route-productID="@item.PId" class="btn btn-danger btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-trash"></i>
-                                    </span>
+                                <a asp-action="Delete" asp-route-orderID="@item.OId" asp-route-productID="@item.PId" class="btn btn-danger btn-icon-split btn-block">
                                     <span class="text">Delete</span>
                                 </a>
                             </td>
@@ -77,28 +71,7 @@
                     }
                 </tbody>
             </table>
-            <h3 id="totalOrder"></h3>
+            <h3>Tổng: @ViewBag.totalOrder</h3>
         </div>
     </div>
 </div>
-
-<script>
-    function calculateTotal() {
-        var quantity = document.getElementById("ODQuantity").value;
-        $.ajax({
-            type: "GET",
-            url: "/OrderDetail/GetProductPrice",
-            data: { productId: productId, quantity: quantity },
-            success: function (result) {
-                document.getElementById("productName").innerHTML = "Tên sản phẩm: " + result.productName.toLocaleString();
-                document.getElementById("productPrice").innerHTML = "Giá sản phẩm: " + result.productPrice.toLocaleString();
-                document.getElementById("ODTotalPrice").innerHTML = "Tổng: " + result.totalPrice.toLocaleString();
-
-                document.getElementById("ODPrice").value = result.totalPrice;
-            },
-            error: function (xhr, status, error) {
-                //handle error
-            }
-        });
-    }
-</script>

@@ -13,10 +13,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.Product)
             </th>
-            <th>
+            <th class="text-center align-middle">
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th></th>
@@ -25,13 +25,13 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.Product.PId)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.DisplayFor(modelItem => item.Category.CId)
             </td>
-            <td>
+            <td class="text-center align-middle">
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })

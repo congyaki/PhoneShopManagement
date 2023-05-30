@@ -1,6 +1,9 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.EF;
+using PhoneShop.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,13 @@ builder.Services.AddDbContext<PhoneShopDbContext>(options => options.UseSqlServe
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    // Cấu hình các tùy chọn cho Identity
+})
+.AddEntityFrameworkStores<PhoneShopDbContext>()
+.AddDefaultTokenProviders();
+//Login
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option =>
     {
@@ -20,8 +30,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

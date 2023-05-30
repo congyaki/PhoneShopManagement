@@ -9,7 +9,7 @@ using PhoneShop.Data.Extensions;
 
 namespace PhoneShop.Data.EF;
 
-public partial class PhoneShopDbContext : IdentityDbContext<AppUser, AppRole, Guid>
+public partial class PhoneShopDbContext : IdentityDbContext<AppUser>
 {
     public PhoneShopDbContext()
     {

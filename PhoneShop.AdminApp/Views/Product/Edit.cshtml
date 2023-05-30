@@ -100,6 +100,11 @@
                 <span asp-validation-for="PStock" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="PAvatar" class="control-label"></label>
+                <input asp-for="PAvatar" name="avatar" type="file" class="form-control-file" />
+                <span asp-validation-for="PAvatar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
