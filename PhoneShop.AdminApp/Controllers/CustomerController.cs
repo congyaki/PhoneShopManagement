@@ -1,102 +1,107 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
+using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize]
-    public class CategoryController : Controller
+    public class CustomerController : Controller
     {
         private readonly PhoneShopDbContext _context;
 
-        public CategoryController(PhoneShopDbContext context)
+        public CustomerController(PhoneShopDbContext context)
         {
             _context = context;
         }
 
-        // GET: Category
-        public async Task<IActionResult> Index(string? keyword)
+        // GET: Customer
+        public async Task<IActionResult> Index(string? keyword, int? page = null)
         {
-            var phoneShopDbContext = _context.Categories.AsQueryable();
+            var pageNumber = page ?? 1;
+            var pageSize = 8;
+            ViewBag.PageSize = pageSize;
+
+            var phoneShopDbContext = _context.Customers.AsQueryable();
 
             if (!string.IsNullOrEmpty(keyword))
             {
                 ViewData["Keyword"] = keyword;
-                phoneShopDbContext = phoneShopDbContext.Where(e => e.CName.Contains(keyword));
+                phoneShopDbContext = phoneShopDbContext.Where(e => e.CusName.Contains(keyword) || e.CusId.ToString().Contains(keyword));
             }
-
-            return View(await phoneShopDbContext.ToListAsync());
+            return View(await phoneShopDbContext.ToPagedListAsync(pageNumber, pageSize));
         }
 
-        // GET: Category/Details/5
+        // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Customers == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CId == id);
-            if (category == null)
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(m => m.CusId == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(customer);
         }
 
-        // GET: Category/Create
+        // GET: Customer/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Category/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CId,CName,CSortOrder,CParentId")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
-        }
-
-        // GET: Category/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Categories == null)
-            {
-                return NotFound();
-            }
-
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return View(category);
-        }
-
-        // POST: Category/Edit/5
+        // POST: Customer/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CId,CName,CSortOrder,CParentId")] Category category)
+        public async Task<IActionResult> Create([Bind("CusId,CusName,CusAddress,CusEmail,CusPhone")] Customer customer)
         {
-            if (id != category.CId)
+            if (ModelState.IsValid)
+            {
+                _context.Add(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(customer);
+        }
+
+        // GET: Customer/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Customers == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customer/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("CusId,CusName,CusAddress,CusEmail,CusPhone")] Customer customer)
+        {
+            if (id != customer.CusId)
             {
                 return NotFound();
             }
@@ -105,12 +110,12 @@ namespace PhoneShop.AdminApp.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CId))
+                    if (!CustomerExists(customer.CusId))
                     {
                         return NotFound();
                     }
@@ -121,49 +126,49 @@ namespace PhoneShop.AdminApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(customer);
         }
 
-        // GET: Category/Delete/5
+        // GET: Customer/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Customers == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CId == id);
-            if (category == null)
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(m => m.CusId == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(customer);
         }
 
-        // POST: Category/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            if (_context.Customers == null)
             {
-                return Problem("Entity set 'PhoneShopDbContext.Categories'  is null.");
+                return Problem("Entity set 'PhoneShopDbContext.Customers'  is null.");
             }
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer != null)
             {
-                _context.Categories.Remove(category);
+                _context.Customers.Remove(customer);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool CustomerExists(int id)
         {
-          return (_context.Categories?.Any(e => e.CId == id)).GetValueOrDefault();
+          return (_context.Customers?.Any(e => e.CusId == id)).GetValueOrDefault();
         }
     }
 }

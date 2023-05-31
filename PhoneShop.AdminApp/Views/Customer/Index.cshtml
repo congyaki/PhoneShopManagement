@@ -1,0 +1,120 @@
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model IPagedList<PhoneShop.Data.Entities.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Khách Hàng</h1>
+
+<!-- DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <a class="btn btn-success" asp-action="Create">Create New</a>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <form asp-action="Index" method="get">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                            <input hidden value="@ViewBag.CategoryID" type="text" name="categoryID" />
+                        </div>
+                        <div class="cold-md-3">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="button" onclick="window.location.href='/Customer/Index'" class="btn btn-dark">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center align-middle">
+                            ID
+                        </th>
+                        <th class="text-center align-middle">
+                            Name
+                        </th>
+                        <th class="text-center align-middle">
+                            Address
+                        </th>
+                        <th class="text-center align-middle">
+                            Email
+                        </th>
+                        <th class="text-center align-middle">
+                            Phone
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CusId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CusName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CusAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CusEmail)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CusPhone)
+                            </td>
+                            <td class="text-center align-middle">
+                                <a asp-action="Details" asp-route-id="@item.CusId" class="btn btn-info btn-icon-split btn-block">
+                                    @*<span class="icon text-white-50">
+                                <i class="fas fa-info-circle"></i>
+                                </span>*@
+                                    <span class="text">Details</span>
+                                </a>
+                                <br>
+                                <a asp-action="Edit" asp-route-id="@item.CusId" class="btn btn-warning btn-icon-split mt-2 btn-block">
+                                    @*<span class="icon text-white-50">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                </span>*@
+                                    <span class="text">Edit</span>
+                                </a>
+                                <br>
+
+                                <a asp-action="Delete" asp-route-id="@item.CusId" class="btn btn-danger btn-icon-split mt-2 btn-block">
+                                    @*<span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                                </span>*@
+                                    <span class="text">Delete</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="d-flex mx-auto">
+                <ul class="pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { LiElementClasses = new[] { "page-item" }, PageClasses = new[] { "page-link" }, UlElementClasses = new[] { "pagination" } })
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="text-muted d-flex mx-auto">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </div>
+        </div>
+    </div>
+</div>
+
