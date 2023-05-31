@@ -27,11 +27,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
 });
 //Login
-/*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+/*builder.Services.AddAuthentication()
     .AddCookie(option =>
     {
-        option.LoginPath = new PathString("/Identity/Account/Login");
-        option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        //option.LoginPath = new PathString("/Identity/Account/Login");
+        option.ExpireTimeSpan = TimeSpan.FromSeconds(30);
     });*/
 
 var app = builder.Build();
