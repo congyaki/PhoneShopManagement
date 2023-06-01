@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using PhoneShop.AdminApp.Areas.Identity.Data;
 
 namespace PhoneShop.AdminApp.Areas.Identity.Pages.Role
 {
+    [Authorize("Admin")]
     public class UserModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;

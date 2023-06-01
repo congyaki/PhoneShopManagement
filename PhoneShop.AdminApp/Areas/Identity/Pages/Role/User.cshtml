@@ -10,36 +10,63 @@
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="@Model.StatusMessage" />
 <p>Tổng số thành viên: @Model.users.Count()</p>
-<table class="table table-striped">
-    <tr>
-        <th>UserName</th>
-        <th>Role</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var user in @Model.users)
-    {
-        <tr>
-            <td>@user.UserName</td>
-            <td>
-                @if (string.IsNullOrEmpty(user.listroles))
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Register">Create New</a>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <form asp-action="Index" method="get">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                            <input hidden value="@ViewBag.CategoryID" type="text" name="categoryID" />
+                        </div>
+                        <div class="cold-md-3">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>UserName</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+                @foreach (var user in @Model.users)
                 {
-                    <a class="text-dark" name="Input.ID" asp-route-id="@user.Id" asp-page="./AddRoleUser">Thêm Role</a>
-                }
-                else
-                {
-                    <a name="Input.ID" asp-route-id="@user.Id" class="btn btn-primary btn-sm" asp-page="./AddRoleUser">@user.listroles</a>
-                }
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            @if (string.IsNullOrEmpty(user.listroles))
+                            {
+                                <a class="text-dark" name="Input.ID" asp-route-id="@user.Id" asp-page="./AddRoleUser">Thêm Role</a>
+                            }
+                            else
+                            {
+                                <a name="Input.ID" asp-route-id="@user.Id" class="btn btn-primary btn-sm" asp-page="./AddRoleUser">@user.listroles</a>
+                            }
 
                     
-            </td>
-            <td>
-                <a name="Input.ID" asp-route-code="@user.Id" class="btn btn-primary btn-sm"
-                    asp-page="./ResetPassword">Đặt lại mật khẩu</a>
-            </td>
-        </tr>
+                        </td>
+                        <td>
+                            <a name="Input.ID" asp-route-code="@user.Id" class="btn btn-primary btn-sm"
+                                asp-page="./ResetPassword">Đặt lại mật khẩu</a>
+                        </td>
+                    </tr>
         
-    }
-</table>
+                }
+            </table>
+        </div>
+    </div>
+</div>
 
 @*@section Scripts {
     <partial name="_ValidationScriptsPartial" />
