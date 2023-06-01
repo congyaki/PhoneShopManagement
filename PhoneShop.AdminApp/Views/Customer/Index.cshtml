@@ -4,11 +4,11 @@
 @model IPagedList<PhoneShop.Data.Entities.Customer>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản Lý Khách Hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
 
-<h1>Khách Hàng</h1>
 
 <!-- DataTales -->
 <div class="card shadow mb-4">
@@ -80,14 +80,14 @@
                                     @*<span class="icon text-white-50">
                                 <i class="fas fa-info-circle"></i>
                                 </span>*@
-                                    <span class="text">Details</span>
+                                    <span class="text">Chi Tiết</span>
                                 </a>
                                 <br>
                                 <a asp-action="Edit" asp-route-id="@item.CusId" class="btn btn-warning btn-icon-split mt-2 btn-block">
                                     @*<span class="icon text-white-50">
                                 <i class="fas fa-exclamation-triangle"></i>
                                 </span>*@
-                                    <span class="text">Edit</span>
+                                    <span class="text">Sửa</span>
                                 </a>
                                 <br>
 
@@ -95,7 +95,7 @@
                                     @*<span class="icon text-white-50">
                                 <i class="fas fa-trash"></i>
                                 </span>*@
-                                    <span class="text">Delete</span>
+                                    <span class="text">Xóa</span>
                                 </a>
                             </td>
                         </tr>
@@ -112,7 +112,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <div class="text-muted d-flex mx-auto">
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
             </div>
         </div>
     </div>

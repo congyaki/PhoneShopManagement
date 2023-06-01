@@ -1,18 +1,17 @@
 ﻿@model IEnumerable<PhoneShop.Data.Entities.Category>
 
 @{
-    ViewData["Title"] = "Danh mục sản phẩm";
+    ViewData["Title"] = "Quản Lý Danh Mục Sản Phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">@ViewData["Title"]</h1>
-
+<h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
 <!-- DataTales -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="row mb-2">
             <div class="col-md-6 col-xs-12">
-                <a class="btn btn-success" asp-action="Create">Create New</a>
+                <a class="btn btn-success" asp-action="Create">Thêm Mới</a>
             </div>
             
             <div class="col-md-6 col-xs-12">
@@ -69,19 +68,19 @@
                                     <span class="icon text-white-50">
                                         <i class="fas fa-info-circle"></i>
                                     </span>
-                                    <span class="text">Details</span>
+                                    <span class="text">Chi Tiết</span>
                                 </a>
                                 <a asp-action ="Edit" asp-route-id="@item.CId" class="btn btn-warning btn-icon-split">
                                     <span class="icon text-white-50">
                                             <i class="fas fa-exclamation-triangle"></i>
                                     </span>
-                                    <span class="text">Edit</span>
+                                    <span class="text">Sửa</span>
                                 </a>
                                 <a asp-action ="Delete" asp-route-id="@item.CId" class="btn btn-danger btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-trash"></i>
                                     </span>
-                                    <span class="text">Delete</span>
+                                    <span class="text">Xóa</span>
                                 </a>
                             </td>
                         </tr>

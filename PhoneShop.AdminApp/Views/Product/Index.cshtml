@@ -5,17 +5,17 @@
 
 
 @{
-    ViewData["Title"] = "Sản Phẩm";
+    ViewData["Title"] = "Quản Lý Sản Phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @if (ViewBag.CategoryID != null)
 {
-    <h2>Các sản phẩm trong thể loại @ViewBag.CategoryName</h2>
+    <h2>Các Sản Phẩm Trong Danh Mục @ViewBag.CategoryName</h2>
 }
 else
 {
-    <h1 class="h3 mb-2 text-gray-800">Tất cả @ViewData["Title"]</h1>
+    <h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
 
 }
 <!-- Page Heading -->
@@ -25,7 +25,7 @@ else
     <div class="card-header py-3">
         <div class="row">
             <div class="col-md-6 col-xs-12">
-                <a class="btn btn-success" asp-action="Create">Create New</a>
+                <a class="btn btn-success" asp-action="Create">Thêm Mới</a>
             </div>
             <div class="col-md-6 col-xs-12">
                 <form asp-action="Index" method="get">
@@ -98,14 +98,14 @@ else
                                     @*<span class="icon text-white-50">
                                         <i class="fas fa-info-circle"></i>
                                     </span>*@
-                                    <span class="text">Details</span>
+                                    <span class="text">Chi Tiết</span>
                                 </a>
                                 <br>
                                 <a asp-action="Edit" asp-route-id="@item.PId" class="btn btn-warning btn-icon-split mt-2 btn-block">
                                     @*<span class="icon text-white-50">
                                             <i class="fas fa-exclamation-triangle"></i>
                                     </span>*@
-                                    <span class="text">Edit</span>
+                                    <span class="text">Sửa</span>
                                 </a>
                                 <br>
 
@@ -113,7 +113,7 @@ else
                                     @*<span class="icon text-white-50">
                                         <i class="fas fa-trash"></i>
                                     </span>*@
-                                    <span class="text">Delete</span>
+                                    <span class="text">Xóa</span>
                                 </a>
                             </td>
                         </tr>
@@ -130,7 +130,7 @@ else
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <div class="text-muted d-flex mx-auto">
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
             </div>
         </div>
     </div>

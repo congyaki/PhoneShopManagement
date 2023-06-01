@@ -1,7 +1,7 @@
 ﻿@model PhoneShop.Data.Entities.OrderDetail
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi Tiêt";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -38,6 +38,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Sửa", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Quay Trở Lại Danh Sách</a>
 </div>

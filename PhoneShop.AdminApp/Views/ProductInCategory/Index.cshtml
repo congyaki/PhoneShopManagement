@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<PhoneShop.Data.Entities.ProductInCategory>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản Lý Ảnh Trong Danh Mục";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
+
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Thêm Mới</a>
 </p>
 <table class="table">
     <thead>

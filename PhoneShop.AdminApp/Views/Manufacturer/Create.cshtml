@@ -1,13 +1,13 @@
 ﻿@model PhoneShop.Data.Entities.Manufacturer
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Thêm Nhà Cung Cấp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>Manufacturer</h4>
+<h1 class="font-weight-bold">@ViewData["Title"]</h1>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,13 +34,13 @@
                 <span asp-validation-for="MPhone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Quay Trở Lại Danh Sách</a>
 </div>
 

@@ -1,14 +1,15 @@
 ﻿@model PhoneShop.Data.Entities.Manufacturer
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi Tiết Nhà Cung Cấp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1 class="font-weight-bold">@ViewData["Title"]</h1>
+
+
 
 <div>
-    <h4>Manufacturer</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -38,6 +39,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.MId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.MId">Sửa</a> |
+    <a asp-action="Index">Quay Trở Lại Danh Sách</a>
 </div>

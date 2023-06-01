@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<PhoneShop.Data.Entities.Manufacturer>
 
 @{
-    ViewData["Title"] = "Nhà Cung Cấp";
+    ViewData["Title"] = " Quản Lý Nhà Cung Cấp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">@ViewData["Title"]</h1>
+<h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
 
 <!-- DataTales -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="row">
             <div class="col-md-6 col-xs-12">
-                <a class="btn btn-success" asp-action="Create">Create New</a>
+                <a class="btn btn-success" asp-action="Create">Thêm Mới</a>
             </div>
             <div class="col-md-6 col-xs-12">
                 <form asp-action="Index" method="get">
@@ -69,15 +69,15 @@
                             <td class="text-center align-middle">
                                 <a asp-action="Details" asp-route-id="@item.MId" class="btn btn-info btn-icon-split btn-block">
                                     
-                                    <span class="text">Details</span>
+                                    <span class="text">Chi Tiết</span>
                                 </a>
                                 <a asp-action="Edit" asp-route-id="@item.MId" class="btn btn-warning btn-icon-split btn-block">
                                     
-                                    <span class="text">Edit</span>
+                                    <span class="text">Sửa</span>
                                 </a>
                                 <a asp-action="Delete" asp-route-id="@item.MId" class="btn btn-danger btn-icon-split btn-block">
                                     
-                                    <span class="text">Delete</span>
+                                    <span class="text">Xóa</span>
                                 </a>
                             </td>
                         </tr>
