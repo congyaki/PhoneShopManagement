@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PhoneShop.Data.EF;
 using PhoneShop.Data.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -14,8 +14,19 @@ builder.Services.AddDbContext<PhoneShopDbContext>(options => options.UseSqlServe
 
 
 builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+
+// Đăng ký dịch vụ Identity
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
+
+
+// Đăng ký dịch vụ RoleManager
+builder.Services.AddScoped<RoleManager<IdentityRole>>();
 
 
 builder.Services.AddControllersWithViews();
@@ -26,12 +37,27 @@ builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireUppercase = false;
 });
+
+
+
+
+//đăng ký dịch vụ bộ nhớ đệm phân tán (Distributed Memory Cache) để lưu trữ tạm thời dữ liệu trong ứng dụng
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    //thời gian chờ không hoạt động của phiên trước khi bị xóa là 30
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    //cho phép truy cập cookie của phiên thông qua HTTP, giúp ngăn chặn tấn công
+    options.Cookie.HttpOnly = true;
+    //đảm bảo tính mạng của phiên trong trường hợp khẩn cấp.
+    options.Cookie.IsEssential = true;
+});
 //Login
 /*builder.Services.AddAuthentication()
     .AddCookie(option =>
     {
-        //option.LoginPath = new PathString("/Identity/Account/Login");
-        option.ExpireTimeSpan = TimeSpan.FromSeconds(30);
+        option.LoginPath = new PathString("/Identity/Account/Login");
+        *//*option.ExpireTimeSpan = TimeSpan.FromSeconds(30);*//*
     });*/
 
 var app = builder.Build();
@@ -43,6 +69,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

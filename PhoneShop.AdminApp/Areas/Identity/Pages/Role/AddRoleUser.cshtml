@@ -1,0 +1,31 @@
+﻿@page "/identity/user/addrole/{id}"
+@using PhoneShop.AdminApp.Areas.Identity.Pages.Role;
+@model AddRoleUser
+@{
+    ViewData["Title"] = "Gán Role";
+}
+<h2>Thiết lập Role cho thành viên: @Model.user.UserName</h2>
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-floating">
+                <label asp-for="RoleNames" class="form-label"></label>
+                @Html.DropDownListFor(m => m.RoleNames, Model.allRoles, new {
+                    id = "id-select-roles",
+                    @class = "form-control"
+                })
+                <span asp-validation-for="RoleNames" class="text-danger"></span>
+            </div>
+            
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Cập nhật</button>
+            <a asp-page="./User">Danh sách thành viên</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

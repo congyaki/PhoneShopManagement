@@ -13,15 +13,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using PhoneShop.AdminApp.Areas.Identity.Data;
 
-namespace PhoneShop.AdminApp.Areas.Identity.Pages.Account
+namespace PhoneShop.AdminApp.Areas.Identity.Pages.Role
 {
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public ResetPasswordModel(UserManager<ApplicationUser> userManager)
+        public ResetPasswordModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         /// <summary>
@@ -72,14 +74,22 @@ namespace PhoneShop.AdminApp.Areas.Identity.Pages.Account
 
         }
 
-        public IActionResult OnGet(string code = null)
+        public ApplicationUser user { get; set; }
+
+        public async Task<IActionResult> OnGet(string code = null)
         {
             if (code == null)
             {
-                return BadRequest("A code must be supplied for password reset.");
+                return BadRequest("Chưa có code");
             }
             else
             {
+                user = await _userManager.FindByIdAsync(code);
+                if (user == null)
+                {
+                    return NotFound($"Không thấy User, id = {code}");
+                }
+
                 Input = new InputModel
                 {
                     Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
@@ -90,22 +100,23 @@ namespace PhoneShop.AdminApp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
-                return Page();
+                return RedirectToPage("./ResetPassword", Input.Code);
             }
 
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToPage("./ResetPasswordConfirmation");
+                return RedirectToPage("./ResetPassword", Input.Code);
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ResetPasswordConfirmation");
+                return RedirectToPage("./User");
             }
 
             foreach (var error in result.Errors)

@@ -78,7 +78,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-action="Index" asp-controller="Product">Người Dùng</a>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Role/User">Users</a>
                     </div>
                 </div>
             </li>
@@ -310,6 +310,7 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    @*<partial name="_StatusMessage" model="@thongbao" />*@
                     @RenderBody()
                 </div>
                 <!-- /.container-fluid -->

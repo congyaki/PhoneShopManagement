@@ -32,7 +32,7 @@ namespace PhoneShop.AdminApp.Controllers
             if (!string.IsNullOrEmpty(keyword))
             {
                 ViewData["Keyword"] = keyword;
-                phoneShopDbContext = phoneShopDbContext.Where(e => e.PName.Contains(keyword));
+                phoneShopDbContext = phoneShopDbContext.Where(e => e.PName.Contains(keyword) || e.PId.ToString().Contains(keyword));
             }
 
             if (categoryID != null && categoryID != 0)
@@ -145,7 +145,8 @@ namespace PhoneShop.AdminApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PId,PName,MId,PDescription,PColor,PStorage,PRam,PScreenSize,PResolution,POperatingSystem,PCamera,PBatteryCapacity,PConnectivity,PWeight,PDimension,PPrice,POriginalPrice,PStock")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("PId,PName,MId,PDescription,PColor,PStorage,PRam,PScreenSize,PResolution,POperatingSystem,PCamera,PBatteryCapacity,PConnectivity,PWeight,PDimension,PPrice,POriginalPrice,PStock,PAvatar")] Product product, 
+                                                IFormFile avatar)
         {
             if (id != product.PId)
             {
@@ -156,12 +157,52 @@ namespace PhoneShop.AdminApp.Controllers
             {
                 try
                 {
+                    // Check if the user uploaded a new avatar image
+                    if (avatar != null && avatar.Length > 0)
+                    {
+                        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                        var extension = Path.GetExtension(avatar.FileName).ToLower();
+                        if (!allowedExtensions.Contains(extension))
+                        {
+                            ModelState.AddModelError("avatar", "Chỉ cho phép tải lên các tệp hình ảnh định dạng JPG, JPEG, PNG hoặc GIF.");
+                            return View(product);
+                        }
+
+                        // Get the filename and extension
+                        var fileName = Path.GetFileNameWithoutExtension(avatar.FileName);
+
+                        // Create a unique filename
+                        var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+                        // Create a path for the imagefile
+                        var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "ProductImage", uniqueFileName);
+
+                        // Save the image file to the server
+                        using (var stream = new FileStream(imagePath, FileMode.Create))
+                        {
+                            await avatar.CopyToAsync(stream);
+                        }
+
+                        // Delete the old avatar image file
+                        if (!string.IsNullOrEmpty(product.PAvatar))
+                        {
+                            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "ProductImage", product.PAvatar);
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+
+                        // Set the product avatar property to the new filename
+                        product.PAvatar = uniqueFileName;
+                    }
+
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.PId))
+                    if (!_context.Products.Any(e => e.PId == id))
                     {
                         return NotFound();
                     }
@@ -172,9 +213,10 @@ namespace PhoneShop.AdminApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MId"] = new SelectList(_context.Manufacturers, "MId", "MName", product.MId);
+            ViewData["MId"] = new SelectList(_context.Manufacturers, "MId", "MAddress", product.MId);
             return View(product);
         }
+
 
         // GET: Product/Delete/5
         public async Task<IActionResult> Delete(int? id)

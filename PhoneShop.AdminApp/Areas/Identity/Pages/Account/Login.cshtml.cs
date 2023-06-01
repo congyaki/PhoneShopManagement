@@ -120,6 +120,7 @@ namespace PhoneShop.AdminApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    HttpContext.Session.SetString("USER_NAME", Input.Email);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

@@ -31,7 +31,7 @@ namespace PhoneShop.AdminApp.Controllers
             if (!string.IsNullOrEmpty(keyword))
             {
                 ViewData["Keyword"] = keyword;
-                phoneShopDbContext = phoneShopDbContext.Where(e => e.MName.Contains(keyword));
+                phoneShopDbContext = phoneShopDbContext.Where(e => e.MName.Contains(keyword) || e.MId.ToString().Contains(keyword));
             }
 
             return View(await phoneShopDbContext.ToListAsync());
