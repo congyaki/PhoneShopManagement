@@ -9,7 +9,8 @@ using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
+
 
     public class OrderController : Controller
     {

@@ -9,8 +9,7 @@ using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize]
-
+    /*[Authorize(Roles = "Admin,Manager")]*/
     public class ProductController : Controller
     {
         private readonly PhoneShopDbContext _context;
@@ -19,6 +18,7 @@ namespace PhoneShop.AdminApp.Controllers
         {
             _context = context;
         }
+
 
         // GET: Product
         public async Task<IActionResult> Index(int? categoryID = null, string? keyword = null, int? page = null)

@@ -15,17 +15,17 @@
     <div class="card-header py-3">
         <div class="row">
             <div class="col-md-6 col-xs-12">
-                <a class="btn btn-success" asp-action="Create">Create New</a>
+                <a class="btn btn-success" asp-action="Create">Thêm Mới</a>
             </div>
             <div class="col-md-6 col-xs-12">
                 <form asp-action="Index" method="get">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                             <input hidden value="@ViewBag.CategoryID" type="text" name="categoryID" />
                         </div>
-                        <div class="cold-md-3">
-                            <button type="submit" class="btn btn-primary">Search</button>
+                        <div class="cold-md-4">
+                            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
                             <button type="button" onclick="window.location.href='/Customer/Index'" class="btn btn-dark">Reset</button>
                         </div>
                     </div>
@@ -42,16 +42,16 @@
                             ID
                         </th>
                         <th class="text-center align-middle">
-                            Name
+                            Tên
                         </th>
                         <th class="text-center align-middle">
-                            Address
+                            Địa Chỉ
                         </th>
                         <th class="text-center align-middle">
                             Email
                         </th>
                         <th class="text-center align-middle">
-                            Phone
+                            SĐT
                         </th>
                         <th></th>
                     </tr>
@@ -60,19 +60,19 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.CusId)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.CusName)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.CusAddress)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.CusEmail)
                             </td>
-                            <td>
+                            <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.CusPhone)
                             </td>
                             <td class="text-center align-middle">

@@ -18,6 +18,8 @@ using PhoneShop.AdminApp.Areas.Identity.Data;
 
 namespace PhoneShop.AdminApp.Areas.Identity.Pages.Role
 {
+    [Authorize(Roles = "Admin")]
+
     public class AddRoleUser : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

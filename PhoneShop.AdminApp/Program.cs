@@ -28,13 +28,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 // Đăng ký dịch vụ RoleManager
 builder.Services.AddScoped<RoleManager<IdentityRole>>();
 
-builder.Services.AddAuthorization(options =>
+/*builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", policy =>
         policy.RequireRole("Admin"));
     options.AddPolicy("Manager", policy =>
         policy.RequireRole("Manager"));
-});
+});*/
 
 builder.Services.AddControllersWithViews();
 

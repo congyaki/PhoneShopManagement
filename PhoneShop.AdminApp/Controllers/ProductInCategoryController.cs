@@ -11,7 +11,8 @@ using PhoneShop.Data.Entities;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
+
     public class ProductInCategoryController : Controller
     {
         private readonly PhoneShopDbContext _context;

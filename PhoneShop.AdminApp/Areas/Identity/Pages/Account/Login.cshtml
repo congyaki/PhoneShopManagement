@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/png" href="/img/Logo_CellPhoneX.png">
 
     <title>CellPhoneX - Login</title>
 
@@ -47,19 +48,19 @@
                             <div class="col-lg-6 pb-5">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome</h1>
                                     </div>
                                     <form id="account" method="post">
                                     
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                    id="exampleInputEmail" aria-describedby="emailHelp"
-                                                   placeholder="Enter Email Address..." asp-for="Input.Email" autocomplete="username" aria-required="true">
+                                                   placeholder="Email" asp-for="Input.Email" autocomplete="username" aria-required="true">
                                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                   id="exampleInputPassword" placeholder="Password" asp-for="Input.Password" autocomplete="current-password" aria-required="true">
+                                                   id="exampleInputPassword" placeholder="Mật khẩu" asp-for="Input.Password" autocomplete="current-password" aria-required="true">
                                             <span asp-validation-for="Input.Password" class="text-danger"></span>
 
                                         </div>
@@ -73,16 +74,16 @@
                                             @Html.ValidationSummary()
                                         </div>
                                         <button id="login-submit" type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Đăng Nhập
                                         </button>
 
                                     </form>
                                     <hr class="pb-5">
                                     <div class="text-center">
-                                        <a class="small" asp-action="ResetPassWord">Forgot Password?</a>
+                                        .
                                     </div>
                                     <div class="text-center pb-5">
-                                        <a class="small" asp-action="Register">Create an Account!</a>
+                                        .
                                     </div>
                                 </div>
                             </div>

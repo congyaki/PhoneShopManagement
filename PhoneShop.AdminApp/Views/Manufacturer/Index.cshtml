@@ -18,12 +18,12 @@
             <div class="col-md-6 col-xs-12">
                 <form asp-action="Index" method="get">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                         </div>
-                        <div class="cold-md-3">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                            <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
+                        <div class="cold-md-4">
+                            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+                            <button type="button" onclick="window.location.href='/Manufacturer/Index'" class="btn btn-dark">Reset</button>
                         </div>
                     </div>
                 </form>
@@ -36,16 +36,19 @@
                 <thead>
                     <tr>
                         <th class="text-center align-middle">
-                            @Html.DisplayNameFor(model => model.MName)
+                            ID
                         </th>
                         <th class="text-center align-middle">
-                            @Html.DisplayNameFor(model => model.MAddress)
+                            Tên
                         </th>
                         <th class="text-center align-middle">
-                            @Html.DisplayNameFor(model => model.MEmail)
+                            Địa Chỉ
                         </th>
                         <th class="text-center align-middle">
-                            @Html.DisplayNameFor(model => model.MPhone)
+                            Email
+                        </th>
+                        <th class="text-center align-middle">
+                            SĐT
                         </th>
                         <th></th>
                     </tr>
@@ -54,6 +57,9 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => item.MId)
+                            </td>
                             <td class="text-center align-middle">
                                 @Html.DisplayFor(modelItem => item.MName)
                             </td>

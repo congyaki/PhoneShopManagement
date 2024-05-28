@@ -30,12 +30,12 @@ else
             <div class="col-md-6 col-xs-12">
                 <form asp-action="Index" method="get">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                             <input hidden value="@ViewBag.CategoryID" type="text" name="categoryID" />
                         </div>
-                        <div class="cold-md-3">
-                            <button type="submit" class="btn btn-primary">Search</button>
+                        <div class="cold-md-4">
+                            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
                             <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
                         </div>
                     </div>
@@ -49,22 +49,22 @@ else
                 <thead>
                     <tr>
                         <th class="text-center align-middle">
-                            Product Name
+                            Tên Sản Phẩm
                         </th>
                         <th class="text-center align-middle">
-                            Avatar
+                            Ảnh
                         </th>
                         <th class="text-center align-middle">
-                            Manufacturer
+                            Nhà Cung Cấp
                         </th>
                         <th class="text-center align-middle">
-                            Price
+                            Giá bán
                         </th>
                         <th class="text-center align-middle">
-                            Origina lPrice
+                            Giá Gốc
                         </th>
                         <th class="text-center align-middle">
-                            Stock
+                            SL Tồn
                         </th>
                         <th></th>
                     </tr>

@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using PhoneShop.AdminApp.Areas.Identity.Data;
 using PhoneShopManagement.Models;
 using System.Diagnostics;
-
 namespace PhoneShopManagement.Controllers
 {
-    [Authorize]
+    /*[Authorize]*/
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,6 +20,7 @@ namespace PhoneShopManagement.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 

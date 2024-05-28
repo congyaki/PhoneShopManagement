@@ -13,16 +13,16 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-floating">
-                        <label asp-for="Input.FirstName"></label>
-                        <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" placeholder="First Name"/>
-                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                        <label asp-for="Input.LastName">Họ</label>
+                        <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" placeholder="Họ"/>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-floating">
-                        <label asp-for="Input.LastName"></label>
-                        <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" placeholder="Last Name"/>
-                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                        <label asp-for="Input.FirstName">Tên</label>
+                        <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" placeholder="Tên"/>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -32,16 +32,16 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="PassWord"/>
+                <label asp-for="Input.Password">Mật Khẩu</label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Mật Khẩu"/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-2">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="PassWord"/>
+                <label asp-for="Input.ConfirmPassword">Xác Nhận Mật Khẩu</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Mật Khẩu"/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Tạo Tài Khoản</button>
         </form>
     
 

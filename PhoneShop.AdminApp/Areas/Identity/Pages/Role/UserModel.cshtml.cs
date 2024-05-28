@@ -7,7 +7,7 @@ using PhoneShop.AdminApp.Areas.Identity.Data;
 
 namespace PhoneShop.AdminApp.Areas.Identity.Pages.Role
 {
-    [Authorize("Admin")]
+    [Authorize(Roles ="Admin")]
     public class UserModel : PageModel
     {
         private readonly RoleManager<IdentityRole> _roleManager;

@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form method="post">
             <div class="form-floating">
-                <label asp-for="RoleNames" class="form-label"></label>
+                <label asp-for="RoleNames" class="form-label">Quyền</label>
                 @Html.DropDownListFor(m => m.RoleNames, Model.allRoles, new {
                     id = "id-select-roles",
                     @class = "form-control"

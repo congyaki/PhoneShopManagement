@@ -11,7 +11,7 @@ using PhoneShop.Data.Entities;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin,Manager")]
     public class CategoryController : Controller
     {
         private readonly PhoneShopDbContext _context;

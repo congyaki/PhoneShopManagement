@@ -9,15 +9,15 @@ namespace PhoneShop.Data.Entities
 {
     public class Customer
     {
-        [DisplayName("Customer ID")]
+        [DisplayName("ID")]
         public int CusId { get; set; }
-        [DisplayName("Customer Name")]
+        [DisplayName("Tên")]
         public string CusName { get; set; }
-        [DisplayName("Address")]
+        [DisplayName("Địa Chỉ")]
         public string CusAddress { get; set; }
         [DisplayName("Email")]
         public string CusEmail { get; set; }
-        [DisplayName("Phone")]
+        [DisplayName("SĐT")]
         public string CusPhone { get; set; }
 
         public List<Order>? OrderList { get; set; }
