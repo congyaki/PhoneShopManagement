@@ -120,68 +120,7 @@ namespace PhoneShop.Data.Extensions
                 );
 
 
-            // any guid
-            /*var adminRoleId = new Guid("5768A50E-31B6-4933-B3B3-B0336F5656E6");
-            var adminId = new Guid("7642BE16-2C21-40F0-81BB-CE85B30B0783");
-
-            var manageRoleId = new Guid("F621A3F0-4989-4646-9E9C-9A34CC279A70");
-            var manageId = new Guid("57ADB60C-DBE4-4903-B281-030A9331279D");
-            modelBuilder.Entity<AppRole>().HasData(new AppRole
-            {
-                Id = adminRoleId,
-                Name = "admin",
-                NormalizedName = "admin",
-                Description = "Administrator role"
-            },
-            new AppRole
-            {
-                Id = manageRoleId,
-                Name = "manager",
-                NormalizedName = "manager",
-                Description = "Manager role"
-            }
-            );
-
-            var hasher = new PasswordHasher<AppUser>();
-            modelBuilder.Entity<AppUser>().HasData(new AppUser
-            {
-                Id = adminId,
-                UserName = "admin",
-                NormalizedUserName = "admin",
-                Email = "duccong29092003@gmail.com",
-                NormalizedEmail = "duccong29092003@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
-                SecurityStamp = string.Empty,
-                FirstName = "Cong",
-                LastName = "Do",
-                Dob = new DateTime(2003, 09, 29)
-            },
-            new AppUser
-            {
-                Id = manageId,
-                UserName = "manager",
-                NormalizedUserName = "manager",
-                Email = "manager1@gmail.com",
-                NormalizedEmail = "manager1@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
-                SecurityStamp = string.Empty,
-                FirstName = "Long",
-                LastName = "Do",
-                Dob = new DateTime(2003, 09, 30)
-            });
-
-            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
-            {
-                RoleId = adminRoleId,
-                UserId = adminId
-            },
-            new IdentityUserRole<Guid>
-            {
-                RoleId = manageRoleId,
-                UserId = manageId
-            });*/
+            
         }
     }
 }

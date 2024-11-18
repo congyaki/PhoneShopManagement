@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PhoneShop.AdminApp.Migrations
 {
-    public partial class Update_DB_User : Migration
+    public partial class SeedUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,18 @@ namespace PhoneShop.AdminApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IdentityUserRole<Guid>",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserRole<Guid>", x => new { x.UserId, x.RoleId });
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +168,33 @@ namespace PhoneShop.AdminApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "5768a50e-31b6-4933-b3b3-b0336f5656e6", "e026867b-d414-474f-bdf8-cd41d60419e1", "admin", "admin" },
+                    { "f621a3f0-4989-4646-9e9c-9a34cc279a70", "b2203579-9fa8-4f1b-8aef-825a5a916361", "manager", "manager" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "57adb60c-dbe4-4903-b281-030a9331279d", 0, "1f58d0d5-e923-45cc-ae37-5157bc038aee", "manager1@gmail.com", true, "Long", "Do", false, null, "MANAGER1@GMAIL.COM", "MANAGER", "AQAAAAEAACcQAAAAEGpRAgFxv8MAdO5qJFSqdGu8W9wG51iC8FJWpLQ9b9MVtjLr8h0KLVcNwtWAV/nVoQ==", null, false, "571aedfa-d28d-4f88-82aa-8ce4b3f55a86", false, "manager" },
+                    { "7642be16-2c21-40f0-81bb-ce85b30b0783", 0, "3d649621-c4d2-445d-b8aa-44a031dd37c0", "duccong29092003@gmail.com", true, "Cong", "Do", false, null, "DUCCONG29092003@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAECJsVgN5a6Khnd7nh4hAEM21G2BcPBPFfkkRSAExhG2nlheSMrYddfr+pBCvn8c4ww==", null, false, "857e2c44-0556-4041-bb44-0868c0527505", false, "admin" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "IdentityUserRole<Guid>",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("f621a3f0-4989-4646-9e9c-9a34cc279a70"), new Guid("57adb60c-dbe4-4903-b281-030a9331279d") },
+                    { new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6"), new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783") }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -212,6 +251,9 @@ namespace PhoneShop.AdminApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "IdentityUserRole<Guid>");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

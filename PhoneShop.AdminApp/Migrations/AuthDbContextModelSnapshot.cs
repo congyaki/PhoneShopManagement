@@ -47,6 +47,22 @@ namespace PhoneShop.AdminApp.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "5768a50e-31b6-4933-b3b3-b0336f5656e6",
+                            ConcurrencyStamp = "e026867b-d414-474f-bdf8-cd41d60419e1",
+                            Name = "admin",
+                            NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = "f621a3f0-4989-4646-9e9c-9a34cc279a70",
+                            ConcurrencyStamp = "b2203579-9fa8-4f1b-8aef-825a5a916361",
+                            Name = "manager",
+                            NormalizedName = "manager"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -102,10 +118,12 @@ namespace PhoneShop.AdminApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -136,16 +154,43 @@ namespace PhoneShop.AdminApp.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.ToTable("IdentityUserRole<Guid>");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783"),
+                            RoleId = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6")
+                        },
+                        new
+                        {
+                            UserId = new Guid("57adb60c-dbe4-4903-b281-030a9331279d"),
+                            RoleId = new Guid("f621a3f0-4989-4646-9e9c-9a34cc279a70")
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -226,6 +271,44 @@ namespace PhoneShop.AdminApp.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "7642be16-2c21-40f0-81bb-ce85b30b0783",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3d649621-c4d2-445d-b8aa-44a031dd37c0",
+                            Email = "duccong29092003@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Cong",
+                            LastName = "Do",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "DUCCONG29092003@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAECJsVgN5a6Khnd7nh4hAEM21G2BcPBPFfkkRSAExhG2nlheSMrYddfr+pBCvn8c4ww==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "857e2c44-0556-4041-bb44-0868c0527505",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "57adb60c-dbe4-4903-b281-030a9331279d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1f58d0d5-e923-45cc-ae37-5157bc038aee",
+                            Email = "manager1@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Long",
+                            LastName = "Do",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MANAGER1@GMAIL.COM",
+                            NormalizedUserName = "MANAGER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGpRAgFxv8MAdO5qJFSqdGu8W9wG51iC8FJWpLQ9b9MVtjLr8h0KLVcNwtWAV/nVoQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "571aedfa-d28d-4f88-82aa-8ce4b3f55a86",
+                            TwoFactorEnabled = false,
+                            UserName = "manager"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
