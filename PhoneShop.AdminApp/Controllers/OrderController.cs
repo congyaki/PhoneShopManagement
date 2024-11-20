@@ -10,8 +10,6 @@ using X.PagedList;
 namespace PhoneShop.AdminApp.Controllers
 {
     [Authorize(Roles = "admin,manager")]
-
-
     public class OrderController : Controller
     {
         private readonly PhoneShopDbContext _context;
@@ -66,6 +64,8 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: Order/Create
         [HttpPost]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OId,ODate,CusId,OStatus")] Order order)
         {
@@ -104,6 +104,8 @@ namespace PhoneShop.AdminApp.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("OId,ODate,CusId,OStatus")] Order order)
         {
@@ -159,6 +161,8 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: Order/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

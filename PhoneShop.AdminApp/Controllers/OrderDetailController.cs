@@ -66,6 +66,8 @@ namespace PhoneShop.AdminApp.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int newOrderID, [Bind("PId,OId,ODQuantity,ODPrice")] OrderDetail orderDetail)
         {
@@ -119,6 +121,8 @@ namespace PhoneShop.AdminApp.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int orderID, int productID, [Bind("PId,OId,ODQuantity,ODPrice")] OrderDetail orderDetail)
         {
@@ -174,6 +178,8 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: OrderDetail/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int orderID, int productID)
         {

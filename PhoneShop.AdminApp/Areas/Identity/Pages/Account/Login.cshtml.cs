@@ -113,23 +113,43 @@ namespace PhoneShop.AdminApp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.userName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                // Kiểm tra nếu Input.userName là email
+                var isEmail = new EmailAddressAttribute().IsValid(Input.userName);
+                ApplicationUser user;
+
+                if (isEmail)
                 {
-                    _logger.LogInformation("User logged in.");
-                    HttpContext.Session.SetString("USER_NAME", Input.userName);
-                    return LocalRedirect(returnUrl);
+                    user = await _signInManager.UserManager.FindByEmailAsync(Input.userName);
                 }
-                if (result.RequiresTwoFactor)
+                else
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    user = await _signInManager.UserManager.FindByNameAsync(Input.userName);
                 }
-                if (result.IsLockedOut)
+
+                if (user != null)
                 {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        HttpContext.Session.SetString("USER_NAME", user.UserName);
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
+                    }
                 }
                 else
                 {
@@ -138,8 +158,9 @@ namespace PhoneShop.AdminApp.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Nếu không hợp lệ, hiển thị lại form
             return Page();
         }
+
     }
 }

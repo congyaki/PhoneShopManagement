@@ -11,7 +11,7 @@ using PhoneShop.Data.Entities;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize(Roles ="admin,manager")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly PhoneShopDbContext _context;
@@ -60,6 +60,8 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // POST: Category/Create
+        [Authorize(Roles = "admin,manager")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CId,CName,CSortOrder,CParentId")] Category category)
@@ -92,6 +94,8 @@ namespace PhoneShop.AdminApp.Controllers
         // POST: Category/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "admin,manager")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CId,CName,CSortOrder,CParentId")] Category category)
@@ -125,6 +129,7 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // GET: Category/Delete/5
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -143,6 +148,8 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // POST: Category/Delete/5
+        [Authorize(Roles = "admin,manager")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -78,6 +78,8 @@ namespace PhoneShop.AdminApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin,manager")]
+
         public async Task<IActionResult> Create([Bind("PId,CId")] ProductInCategory productInCategory)
         {
             if (ModelState.IsValid)
@@ -114,6 +116,8 @@ namespace PhoneShop.AdminApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin,manager")]
+
         public async Task<IActionResult> Edit(int id, [Bind("PId,CId")] ProductInCategory productInCategory)
         {
             if (id != productInCategory.CId)
@@ -168,6 +172,8 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: ProductInCategory/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

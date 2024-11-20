@@ -79,6 +79,8 @@ namespace PhoneShop.AdminApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin,manager")]
+
         public async Task<IActionResult> Create([Bind("PId,PName,MId,PDescription,PColor,PStorage,PRam,PScreenSize,PResolution,POperatingSystem,PCamera,PBatteryCapacity,PConnectivity,PWeight,PDimension,PPrice,POriginalPrice,PStock,PAvatar")] 
                                                 Product product, IFormFile avatar)
         {
@@ -144,6 +146,8 @@ namespace PhoneShop.AdminApp.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PId,PName,MId,PDescription,PColor,PStorage,PRam,PScreenSize,PResolution,POperatingSystem,PCamera,PBatteryCapacity,PConnectivity,PWeight,PDimension,PPrice,POriginalPrice,PStock,PAvatar")] Product product, 
                                                 IFormFile avatar)
@@ -239,6 +243,8 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

@@ -22,7 +22,7 @@ using PhoneShop.AdminApp.Areas.Identity.Data;
 
 namespace PhoneShop.AdminApp.Areas.Identity.Pages.Account
 {
-    [Authorize("Admin")]
+    [Authorize(Roles = "admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;

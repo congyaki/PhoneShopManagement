@@ -15,7 +15,7 @@ using PhoneShop.AdminApp.Areas.Identity.Data;
 
 namespace PhoneShop.AdminApp.Areas.Identity.Pages.Role
 {
-    [Authorize("Admin")]
+    [Authorize(Roles = "admin")]
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

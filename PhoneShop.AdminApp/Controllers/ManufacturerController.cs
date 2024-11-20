@@ -12,7 +12,7 @@ using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize(Roles = "admin,manager")]
+    [Authorize]
     public class ManufacturerController : Controller
     {
         private readonly PhoneShopDbContext _context;
@@ -63,6 +63,8 @@ namespace PhoneShop.AdminApp.Controllers
         // POST: Manufacturer/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "admin,manager")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MId,MName,MAddress,MEmail,MPhone")] Manufacturer manufacturer)
@@ -96,6 +98,8 @@ namespace PhoneShop.AdminApp.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MId,MName,MAddress,MEmail,MPhone")] Manufacturer manufacturer)
         {
@@ -147,6 +151,8 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: Manufacturer/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin,manager")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
