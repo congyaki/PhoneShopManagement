@@ -11,7 +11,7 @@ using PhoneShop.Data.Entities;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize(Roles = "admin,manager")]
+    [Authorize]
 
     public class ProductInCategoryController : Controller
     {
@@ -78,7 +78,7 @@ namespace PhoneShop.AdminApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         public async Task<IActionResult> Create([Bind("PId,CId")] ProductInCategory productInCategory)
         {
@@ -116,7 +116,7 @@ namespace PhoneShop.AdminApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         public async Task<IActionResult> Edit(int id, [Bind("PId,CId")] ProductInCategory productInCategory)
         {
@@ -172,7 +172,7 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: ProductInCategory/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

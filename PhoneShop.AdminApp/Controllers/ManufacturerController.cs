@@ -63,7 +63,7 @@ namespace PhoneShop.AdminApp.Controllers
         // POST: Manufacturer/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -98,7 +98,7 @@ namespace PhoneShop.AdminApp.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MId,MName,MAddress,MEmail,MPhone")] Manufacturer manufacturer)
@@ -151,7 +151,7 @@ namespace PhoneShop.AdminApp.Controllers
 
         // POST: Manufacturer/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -23,47 +23,73 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
         var manageRoleId = "F621A3F0-4989-4646-9E9C-9A34CC279A70";
         var manageId = "57ADB60C-DBE4-4903-B281-030A9331279D";
 
-        builder.Entity<IdentityRole>().HasData(new IdentityRole
-        {
-            Id = adminRoleId,
-            Name = "admin",
-            NormalizedName = "ADMIN"
-        },
-        new IdentityRole
-        {
-            Id = manageRoleId,
-            Name = "manager",
-            NormalizedName = "MANAGER"
-        });
+        var employeeId = "7642BE16-2C21-40F0-81BB-CE85B30B0784";
+        var employeeRoleId = "F621A3F0-4989-4646-9E9C-9A34CC279A73";
+
+
+        builder.Entity<IdentityRole>().HasData(
+            new IdentityRole
+            {
+                Id = adminRoleId,
+                Name = "admin",
+                NormalizedName = "ADMIN"
+            },
+            new IdentityRole
+            {
+                Id = employeeRoleId,
+                Name = "employee",
+                NormalizedName = "EMPLOYEE"
+            },
+            new IdentityRole
+            {
+                Id = manageRoleId,
+                Name = "manager",
+                NormalizedName = "MANAGER"
+            }
+        );
 
         // Seed dữ liệu cho user
         var hasher = new PasswordHasher<ApplicationUser>();
-        builder.Entity<ApplicationUser>().HasData(new ApplicationUser
-        {
-            Id = adminId,
-            UserName = "admin",
-            NormalizedUserName = "ADMIN",
-            Email = "duccong29092003@gmail.com",
-            NormalizedEmail = "DUCCONG29092003@GMAIL.COM",
-            EmailConfirmed = true,
-            PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
-            SecurityStamp = Guid.NewGuid().ToString(),
-            FirstName = "Cong",
-            LastName = "Do"
-        },
-        new ApplicationUser
-        {
-            Id = manageId,
-            UserName = "manager",
-            NormalizedUserName = "MANAGER",
-            Email = "manager1@gmail.com",
-            NormalizedEmail = "MANAGER1@GMAIL.COM",
-            EmailConfirmed = true,
-            PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
-            SecurityStamp = Guid.NewGuid().ToString(),
-            FirstName = "Long",
-            LastName = "Do"
-        });
+        builder.Entity<ApplicationUser>().HasData(
+            new ApplicationUser
+            {
+                Id = adminId,
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "duccong29092003@gmail.com",
+                NormalizedEmail = "DUCCONG29092003@GMAIL.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = "Cong",
+                LastName = "Do"
+            },
+            new ApplicationUser
+            {
+                Id = employeeId,
+                UserName = "employee01",
+                NormalizedUserName = "EMPLOYEE01",
+                Email = "employee01@gmail.com",
+                NormalizedEmail = "EMPLOYEE01@GMAIL.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = "Phong",
+                LastName = "Dan"
+            },
+            new ApplicationUser
+            {
+                Id = manageId,
+                UserName = "manager",
+                NormalizedUserName = "MANAGER",
+                Email = "manager1@gmail.com",
+                NormalizedEmail = "MANAGER1@GMAIL.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Abcd1234!"),
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = "Long",
+                LastName = "Do"
+            });
 
         // Seed dữ liệu cho UserRoles (AspNetUserRoles)
         builder.Entity<IdentityUserRole<string>>().HasData(
@@ -71,6 +97,11 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
             {
                 RoleId = adminRoleId,
                 UserId = adminId
+            },
+            new IdentityUserRole<string>
+            {
+                RoleId = employeeRoleId,
+                UserId = employeeId
             },
             new IdentityUserRole<string>
             {

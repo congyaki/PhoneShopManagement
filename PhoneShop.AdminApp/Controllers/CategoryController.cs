@@ -60,7 +60,7 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // POST: Category/Create
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -94,7 +94,7 @@ namespace PhoneShop.AdminApp.Controllers
         // POST: Category/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -148,7 +148,7 @@ namespace PhoneShop.AdminApp.Controllers
         }
 
         // POST: Category/Delete/5
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Roles = "admin,manager,employee")]
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
