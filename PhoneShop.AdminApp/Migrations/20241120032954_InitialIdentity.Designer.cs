@@ -12,8 +12,8 @@ using PhoneShop.AdminApp.Areas.Identity.Data;
 namespace PhoneShop.AdminApp.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20241118162731_SeedUser")]
-    partial class SeedUser
+    [Migration("20241120032954_InitialIdentity")]
+    partial class InitialIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,17 +53,17 @@ namespace PhoneShop.AdminApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5768a50e-31b6-4933-b3b3-b0336f5656e6",
-                            ConcurrencyStamp = "e026867b-d414-474f-bdf8-cd41d60419e1",
+                            Id = "5768A50E-31B6-4933-B3B3-B0336F5656E6",
+                            ConcurrencyStamp = "bf75802c-f256-4836-bc15-840237621fc8",
                             Name = "admin",
-                            NormalizedName = "admin"
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f621a3f0-4989-4646-9e9c-9a34cc279a70",
-                            ConcurrencyStamp = "b2203579-9fa8-4f1b-8aef-825a5a916361",
+                            Id = "F621A3F0-4989-4646-9E9C-9A34CC279A70",
+                            ConcurrencyStamp = "975c574d-be71-49a8-af63-7bde909f4726",
                             Name = "manager",
-                            NormalizedName = "manager"
+                            NormalizedName = "MANAGER"
                         });
                 });
 
@@ -154,30 +154,17 @@ namespace PhoneShop.AdminApp.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.ToTable("IdentityUserRole<Guid>");
 
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("7642be16-2c21-40f0-81bb-ce85b30b0783"),
-                            RoleId = new Guid("5768a50e-31b6-4933-b3b3-b0336f5656e6")
+                            UserId = "7642BE16-2C21-40F0-81BB-CE85B30B0783",
+                            RoleId = "5768A50E-31B6-4933-B3B3-B0336F5656E6"
                         },
                         new
                         {
-                            UserId = new Guid("57adb60c-dbe4-4903-b281-030a9331279d"),
-                            RoleId = new Guid("f621a3f0-4989-4646-9e9c-9a34cc279a70")
+                            UserId = "57ADB60C-DBE4-4903-B281-030A9331279D",
+                            RoleId = "F621A3F0-4989-4646-9E9C-9A34CC279A70"
                         });
                 });
 
@@ -277,9 +264,9 @@ namespace PhoneShop.AdminApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7642be16-2c21-40f0-81bb-ce85b30b0783",
+                            Id = "7642BE16-2C21-40F0-81BB-CE85B30B0783",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3d649621-c4d2-445d-b8aa-44a031dd37c0",
+                            ConcurrencyStamp = "c78c3b99-7878-4cb4-a12e-665396bd81b9",
                             Email = "duccong29092003@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Cong",
@@ -287,17 +274,17 @@ namespace PhoneShop.AdminApp.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "DUCCONG29092003@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECJsVgN5a6Khnd7nh4hAEM21G2BcPBPFfkkRSAExhG2nlheSMrYddfr+pBCvn8c4ww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBkRZm85Z2bD7kuaFdyKDjBszDGPzbPZdWSo2nKFpeJ1sHzYLFhmas3Dj54g30eyVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "857e2c44-0556-4041-bb44-0868c0527505",
+                            SecurityStamp = "781bedf9-36c0-42bc-9d17-76c9b1e898b7",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "57adb60c-dbe4-4903-b281-030a9331279d",
+                            Id = "57ADB60C-DBE4-4903-B281-030A9331279D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f58d0d5-e923-45cc-ae37-5157bc038aee",
+                            ConcurrencyStamp = "e3e8461a-a6fe-4c79-8795-4b5336f4f8ac",
                             Email = "manager1@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Long",
@@ -305,9 +292,9 @@ namespace PhoneShop.AdminApp.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MANAGER1@GMAIL.COM",
                             NormalizedUserName = "MANAGER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGpRAgFxv8MAdO5qJFSqdGu8W9wG51iC8FJWpLQ9b9MVtjLr8h0KLVcNwtWAV/nVoQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHgCgvK6M66FDSC2yzSlVsZntDk+r1fDSQQ8j6Y1t/ky0oN+IeMtJ2kz9CTbTnr3Bg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "571aedfa-d28d-4f88-82aa-8ce4b3f55a86",
+                            SecurityStamp = "d9c57214-4636-4e28-8cca-10b017189869",
                             TwoFactorEnabled = false,
                             UserName = "manager"
                         });

@@ -13,7 +13,7 @@ using PhoneShop.Utilities.Exceptions;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize(Roles = "Admin,Manager")]
+    [Authorize(Roles = "admin,manager")]
 
 
     public class OrderDetailController : Controller

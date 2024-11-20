@@ -34,7 +34,7 @@ public partial class PhoneShopDbContext : DbContext
     public virtual DbSet<ProductInCategory> ProductInCategories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-AVPLSS5\\SQLEXPRESS;Initial Catalog=PhoneShopManagementDB;User ID=sa;Password=123456@Aa;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-AVPLSS5\\SQLEXPRESS;Initial Catalog=PhoneShopManagementDB;Integrated Security=True;TrustServerCertificate=True;MultipleActiveResultSets=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

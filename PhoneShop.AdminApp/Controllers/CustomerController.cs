@@ -14,7 +14,8 @@ using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize(Roles = "Admin,Manager")]
+    [Authorize(Roles = "admin,manager")]
+
 
     public class CustomerController : Controller
     {

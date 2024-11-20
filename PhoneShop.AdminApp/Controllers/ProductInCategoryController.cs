@@ -11,7 +11,7 @@ using PhoneShop.Data.Entities;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize(Roles = "Admin,Manager")]
+    [Authorize(Roles = "admin,manager")]
 
     public class ProductInCategoryController : Controller
     {

@@ -12,7 +12,7 @@ using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    [Authorize(Roles = "Admin,Manager")]
+    [Authorize(Roles = "admin,manager")]
     public class ManufacturerController : Controller
     {
         private readonly PhoneShopDbContext _context;

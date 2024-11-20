@@ -9,7 +9,7 @@ using X.PagedList;
 
 namespace PhoneShop.AdminApp.Controllers
 {
-    /*[Authorize(Roles = "Admin,Manager")]*/
+    [Authorize(Roles = "admin,manager")]
     public class ProductController : Controller
     {
         private readonly PhoneShopDbContext _context;
